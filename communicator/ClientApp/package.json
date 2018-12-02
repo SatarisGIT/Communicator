@@ -17,7 +17,6 @@
     "clean-build": "react-scripts build",
     "clean-test": "react-scripts test",
     "clean-eject": "react-scripts eject",
-	
     "start": "rimraf ./build && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
