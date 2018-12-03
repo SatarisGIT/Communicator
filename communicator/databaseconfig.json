@@ -1,0 +1,12 @@
+{
+  "Database": {
+    "Host": "sataris.tk",
+    "User": "communicator",
+    "Pass": "Communicator123#",
+    "DBName": "communicator"
+  },
+
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=sataris.tk;Port=5432;Database=communicator;User Id=communicator;Password=Communicator123#;"
+  }
+}
