@@ -30,8 +30,8 @@ namespace communicator.Controllers
         }
 
         // GET: api/Users/5
-        [HttpGet("{id}", Name = "Get")]
-        public ActionResult Get([FromRoute]int id)
+        [HttpGet("{id}", Name = "GetUser")]
+        public ActionResult GetUserById([FromRoute]int id)
         {
             if (!ModelState.IsValid)
             {
@@ -50,8 +50,10 @@ namespace communicator.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void AddUser([FromBody] User user)
         {
+            _repository.AddEntity(user);
+            _repository.SaveAll();
         }
 
         // PUT: api/Users/5

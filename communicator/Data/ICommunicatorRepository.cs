@@ -2,19 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace communicator.Data
 {
-    public interface ICommunicatorRepository
+    public interface ICommunicatorRepository<T> where T: class
     {
-        bool SaveAll();
-        void AddEntity(object model);
-
-        IEnumerable<User> GetAllUsers();
-        IEnumerable<Message> GetAllMessages();
-
-        User GetUserById(int id);
-        Message GetMessageById(int id);
+        Task SaveAsync();
+        void Create(T entity);
+        void Update(T entity);
+        void Delete(T entity);
+        Task<IEnumerable<T>> GetAllAsync();
+        Task<IEnumerable<T>> GetByConditionAsync(Expression<Func<T, bool>> expression);
     }
 }
