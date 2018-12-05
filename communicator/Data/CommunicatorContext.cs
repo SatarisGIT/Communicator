@@ -18,7 +18,7 @@ namespace communicator.Data
         {
 
         }
-        //Place for DbSets when the models are prepared
+        
         public DbSet<User> Users { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<MessageInfo> MessageInfos { get; set; }

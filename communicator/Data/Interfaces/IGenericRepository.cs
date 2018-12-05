@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace communicator.Data
 {
-    public interface ICommunicatorRepository<T> where T: class
+    public interface IGenericRepository<T> where T: class
     {
         Task SaveAsync();
         void Create(T entity);

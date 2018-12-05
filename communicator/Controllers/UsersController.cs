@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using communicator.Data;
+using communicator.Data.Interfaces;
 using communicator.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace communicator.Controllers
 {
@@ -13,60 +15,69 @@ namespace communicator.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly ICommunicatorRepository _repository;
+        private IRepositoryWrapper _repository;
+        private ILogger _logger;
 
-        public UsersController(ICommunicatorRepository repository)
+        public UsersController(IRepositoryWrapper repository, ILogger logger)
         {
             _repository = repository;
+            _logger = logger;
         }
         
         // GET: api/Users
         [HttpGet]
-        public IEnumerable<User> GetUsers()
+        public async Task<IActionResult> GetUsers()
         {
-            var users = _repository.GetAllUsers();
-
-            return users;
-        }
-
-        // GET: api/Users/5
-        [HttpGet("{id}", Name = "GetUser")]
-        public ActionResult GetUserById([FromRoute]int id)
-        {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                var users = await _repository.User.GetAllUsersAsync();
+                return Ok(users);
             }
-
-            var user = _repository.GetUserById(id);
-
-            if(user == null)
+            catch (Exception e)
             {
-                return NotFound();
+                _logger.LogError($"Error in GetUsers: {e}");
+                return null;
             }
-
-            return Ok(user);
         }
 
-        // POST: api/Users
-        [HttpPost]
-        public void AddUser([FromBody] User user)
-        {
-            _repository.AddEntity(user);
-            _repository.SaveAll();
-        }
+        //// GET: api/Users/5
+        //[HttpGet("{id}", Name = "GetUser")]
+        //public ActionResult GetUserById([FromRoute]int id)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-        // PUT: api/Users/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
+        //    var user = _repository.GetUserById(id);
 
-        }
+        //    if(user == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //    return Ok(user);
+        //}
+
+        //// POST: api/Users
+        //[HttpPost]
+        //public void AddUser([FromBody] User user)
+        //{
+        //    _repository.AddEntity(user);
+        //    _repository.SaveAll();
+        //}
+
+        //// PUT: api/Users/5
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody] string value)
+        //{
+
+        //}
+
+        //// DELETE: api/ApiWithActions/5
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
     }
 }
