@@ -1,2 +1,14 @@
 
 \.vs/communicator/DesignTimeBuild/\.dtbcache
+
+\.vs/communicator/v15/Server/sqlite3/db\.lock
+
+\.vs/communicator/v15/Server/sqlite3/storage\.ide
+
+\.vs/communicator/v15/Server/sqlite3/storage\.ide-shm
+
+\.vs/communicator/v15/Server/sqlite3/storage\.ide-wal
+
+*.ide-shm
+
+\.vs/communicator/v15/
