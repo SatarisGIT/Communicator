@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using communicator.Models;
+using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,8 @@ namespace communicator.Data
 
         }
         //Place for DbSets when the models are prepared
+        public DbSet<User> Users { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<MessageInfo> MessageInfos { get; set; }
     }
 }
