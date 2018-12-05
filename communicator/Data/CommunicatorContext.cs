@@ -21,6 +21,21 @@ namespace communicator.Data
         
         public DbSet<User> Users { get; set; }
         public DbSet<Message> Messages { get; set; }
-        public DbSet<MessageInfo> MessageInfos { get; set; }
+        public DbSet<Message> MessageInfos { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Message>()
+                .HasOne(p => p.Receiver)
+                .WithMany(t => t.MessagesReceived)
+                .HasForeignKey(m => m.ReceiverID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Message>()
+                .HasOne(p => p.Sender)
+                .WithMany(t => t.MessagesSent)
+                .HasForeignKey(m => m.SenderID)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
     }
 }

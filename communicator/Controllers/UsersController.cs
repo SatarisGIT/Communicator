@@ -26,7 +26,7 @@ namespace communicator.Controllers
         
         // GET: api/Users
         [HttpGet]
-        public async Task<IActionResult> GetUsers()
+        public async Task<ActionResult> GetUsers()
         {
             try
             {
@@ -59,13 +59,21 @@ namespace communicator.Controllers
         //    return Ok(user);
         //}
 
-        //// POST: api/Users
-        //[HttpPost]
-        //public void AddUser([FromBody] User user)
-        //{
-        //    _repository.AddEntity(user);
-        //    _repository.SaveAll();
-        //}
+        // POST: api/Users
+        [HttpPost]
+        public async Task<IActionResult> CreateUser([FromBody] User user)
+        {
+            try
+            {
+                await _repository.User.CreateUserAsync(user);
+                return Ok(user);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error in CreateUser: {e}");
+                return StatusCode(500);
+            }
+        }
 
         //// PUT: api/Users/5
         //[HttpPut("{id}")]
