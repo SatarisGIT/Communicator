@@ -16,9 +16,9 @@ namespace communicator.Controllers
     public class UsersController : ControllerBase
     {
         private IRepositoryWrapper _repository;
-        private ILogger _logger;
+        private ILogger<UsersController> _logger;
 
-        public UsersController(IRepositoryWrapper repository, ILogger logger)
+        public UsersController(IRepositoryWrapper repository, ILogger<UsersController> logger)
         {
             _repository = repository;
             _logger = logger;
@@ -36,7 +36,7 @@ namespace communicator.Controllers
             catch (Exception e)
             {
                 _logger.LogError($"Error in GetUsers: {e}");
-                return null;
+                return NotFound();
             }
         }
 
