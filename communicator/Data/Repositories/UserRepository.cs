@@ -10,7 +10,7 @@ namespace communicator.Data
 {
     public class UserRepository : GenericRepository<User>, IUserRepository
     {
-        private readonly ILogger<GenericRepository<User>> _logger;
+        private readonly ILogger _logger;
 
         public UserRepository(CommunicatorContext context, ILogger<GenericRepository<User>> logger) : base(context, logger)
         {

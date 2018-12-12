@@ -40,28 +40,25 @@ namespace communicator.Controllers
             }
         }
 
-        //// GET: api/Users/5
-        //[HttpGet("{id}", Name = "GetUser")]
-        //public ActionResult GetUserById([FromRoute]int id)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    var user = _repository.GetUserById(id);
-
-        //    if(user == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(user);
-        //}
+        // GET: api/Users/5
+        [HttpGet]
+        public async Task<ActionResult> GetUserById(int id)
+        {
+            try
+            {
+                var user = await _repository.User.GetUserByIdAsync(id);
+                return Ok(user);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error in GetUserById: {e}");
+                return NotFound();
+            }
+        }
 
         // POST: api/Users
         [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] User user)
+        public async Task<ActionResult> CreateUser([FromBody] User user)
         {
             try
             {
@@ -75,17 +72,42 @@ namespace communicator.Controllers
             }
         }
 
-        //// PUT: api/Users/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
+        [HttpPatch]
+        public async Task<ActionResult> UpdateUser(int id)
+        {
+            try
+            {
+                var user = await _repository.User.GetUserByIdAsync(id);
+                await _repository.User.UpdateUserAsync(user);
+                return Ok(200);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error in UpdateUser: {e}");
+                return StatusCode(500);
+            }
+        }
 
-        //}
+        // DELETE: api/ApiWithActions/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteUser(int id)
+        {
+            try
+            {
+                var user = await _repository.User.GetUserByIdAsync(id);
 
-        //// DELETE: api/ApiWithActions/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+                if(user != null)
+                {
+                    await _repository.User.DeleteUserAsync(user);
+                }
+
+                return Ok(user);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error in DeleteUser: {e}");
+                return StatusCode(500);
+            }
+        }
     }
 }
