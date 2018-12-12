@@ -28,8 +28,7 @@ namespace communicator
         {
             services.AddDbContext<CommunicatorContext>(options =>
             {
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
-
+                options.UseLazyLoadingProxies().UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();

@@ -37,5 +37,7 @@ namespace communicator.Data
                 .HasForeignKey(m => m.SenderID)
                 .OnDelete(DeleteBehavior.Restrict);
         }
+
+        
     }
 }

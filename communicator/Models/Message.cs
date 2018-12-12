@@ -13,11 +13,11 @@ namespace communicator.Models
 
         public string Content { get; set; }
 
-        public User Sender { get; set; }
+        public virtual User Sender { get; set; }
 
         public int SenderID { get; set; }
 
-        public User Receiver { get; set; }
+        public virtual User Receiver { get; set; }
 
         public int ReceiverID { get; set; }
 
