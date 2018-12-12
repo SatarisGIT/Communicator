@@ -23,7 +23,7 @@ namespace communicator.Controllers
             _repository = repository;
             _logger = logger;
         }
-        
+
         // GET: api/Users
         [HttpGet]
         public async Task<ActionResult> GetUsers()
@@ -41,7 +41,7 @@ namespace communicator.Controllers
         }
 
         // GET: api/Users/5
-        [HttpGet]
+        [HttpGet("id")]
         public async Task<ActionResult> GetUserById(int id)
         {
             try
