@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.scss';
 
-export interface HelloProps { compiler: string; framework: string; }
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 import { Observable, Subscription } from 'rxjs';
@@ -11,40 +11,26 @@ import axios from 'axios';
 import HttpApi from './assets/lib/httpapi';
 
 import NavbarComponent from './components/navbar/navbar'
-
-
-declare global {
-     namespace JSX {
-         interface IntrinsicElements {
-             'my-html-custom-tag': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-         }
-     }
- }
+import AsideComponent from './components/aside/aside'
+import MessageBoxComponent from './components/message-box/message-box';
+import AdminPanelComponent from './components/admin-panel/admin-panel';
+import HomeComponent from './components/home/home';
 
 class App extends Component {
 
      render() {
 
           return (
+               <div>
+                    <NavbarComponent></NavbarComponent>
+                    <AsideComponent></AsideComponent>
 
-               <div className="App">
-                    <header className="App-header">
-                         <img src={logo} className="App-logo" alt="logo" />
-                         <p>
-                              Edit <code>src/App.js</code> and save to reload.
-                         </p>
-                         <a
-                              className="App-link"
-                              href="https://reactjs.org"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                         >
-                              Learn Reacttttsrsadasdasd
+                    <main className="main">
+                         <Route exact path="/" component={HomeComponent} />
+                         <Route path="/admin" component={AdminPanelComponent} />
+                         <Route path="/messages" component={MessageBoxComponent} />
+                    </main>
 
-                         <NavbarComponent></NavbarComponent>
-
-                         </a>
-                    </header>
                </div>
           );
      }
@@ -55,37 +41,34 @@ export default App;
 
 
 
-export class FetchData extends Component {
+//For test purposes
+export class FetchData extends Component<any, any> {
      displayName = FetchData.name
 
+     subscriptions$: Subscription;
 
-     constructor(props) {
+     constructor(props: any) {
           super(props);
           this.state = { forecasts: [], loading: true };
 
           this.subscriptions$ = new Subscription();
 
-          Observable.create
 
-          window.
-
-
-
-               this.subscriptions$.add(
-                    HttpApi.get('https://jsonplaceholder.typicode.com/users')
-                         .subscribe(
-                              data => {
-                                   console.log('[data!12] => ', data)
-                                   this.setState({ forecasts: data, loading: false });
-                              }
-                         )
-               )
+          this.subscriptions$.add(
+               HttpApi.get('https://jsonplaceholder.typicode.com/users')
+                    .subscribe(
+                         (data: any) => {
+                              console.log('[data!12] => ', data)
+                              this.setState({ forecasts: data, loading: false });
+                         }
+                    )
+          )
 
           this.subscriptions$.unsubscribe();
 
      }
 
-     static renderForecastsTable(forecasts) {
+     static renderForecastsTable(forecasts: Array<any>) {
           return (
                <table className='table'>
                     <thead>
@@ -111,6 +94,8 @@ export class FetchData extends Component {
      }
 
      render() {
+
+
           let contents = this.state.loading
                ? <p><em>Loading...</em></p>
                : FetchData.renderForecastsTable(this.state.forecasts);

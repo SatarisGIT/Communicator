@@ -1,17 +1,18 @@
 @import '../../index.scss';
 
-.navbar {
+.aside {
      background-color: $main-dark-color;
-     height: $nav-height;
      position: fixed;
      top: 0;
+     height: 100%;
      width: $nav-width;
      display: flex;
-     
+     margin-top: 60px;
+     color: #dedede;
+
      border: 1px solid white;
      box-sizing: border-box;
 
-     a {
-          color: white;
-     }
+     overflow-y: auto;
+
 }
