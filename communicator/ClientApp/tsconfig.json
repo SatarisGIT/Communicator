@@ -18,6 +18,7 @@
     "noImplicitThis": true,
     "noImplicitAny": true,
     "importHelpers": true,
+    "strictPropertyInitialization": false,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": false,
