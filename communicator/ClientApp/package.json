@@ -3,6 +3,7 @@
      "version": "0.1.0",
      "private": true,
      "dependencies": {
+          "@types/toastr": "^2.1.35",
           "axios": "^0.18.0",
           "bootstrap": "^3.3.7",
           "react": "^16.6.3",
@@ -11,9 +12,11 @@
           "react-router-bootstrap": "^0.24.4",
           "react-router-dom": "^4.2.2",
           "react-scripts": "2.1.1",
+          "react-toastr": "^3.0.0",
           "rimraf": "^2.6.2",
           "rxjs": "^6.3.3",
-          "rxjs-compat": "^6.3.3"
+          "rxjs-compat": "^6.3.3",
+          "toastr": "^2.1.4"
      },
      "devDependencies": {
           "@types/jest": "^23.3.10",

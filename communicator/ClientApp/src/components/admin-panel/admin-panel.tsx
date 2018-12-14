@@ -3,7 +3,13 @@ import HttpApi from '../../assets/lib/httpapi';
 import { Subscription } from 'rxjs';
 import { User } from '../../models/User';
 
+import toastr from 'toastr'
+
+import 'toastr/build/Admin'
+
+
 import './admin-panel.scss';
+import LoadingComponent from '../loading/loading';
 
 interface IAdminPanelProps {
      any: any
@@ -11,9 +17,10 @@ interface IAdminPanelProps {
 
 interface IAdminPanelState {
      users: Array<User>;
-     loading: boolean;
+     loading: {
+          global: boolean;
+     };
 }
-
 
 
 export default class AdminPanelComponent extends Component<IAdminPanelProps, IAdminPanelState> {
@@ -25,7 +32,9 @@ export default class AdminPanelComponent extends Component<IAdminPanelProps, IAd
 
           this.state = {
                users: [],
-               loading: true
+               loading: {
+                    global: true
+               }
           };
 
           this.subscriptions$ = new Subscription();
@@ -35,7 +44,10 @@ export default class AdminPanelComponent extends Component<IAdminPanelProps, IAd
                     .subscribe(
                          (data: User[]) => {
                               console.log('[state.users] => ', data)
-                              this.setState({ users: data, loading: false });
+
+                              let loading = this.state.loading;
+                              loading.global = false;
+                              this.setState({ users: data, loading: loading });
                          },
 
                          (err: any) => {
@@ -53,6 +65,13 @@ export default class AdminPanelComponent extends Component<IAdminPanelProps, IAd
 
 
      render() {
+
+
+
+          toastr.success("TEST!");
+          toastr.info('Are you the 6 fingered man?')
+
+
 
           let userTable = <table className='admin-panel-table'>
                <thead>
@@ -76,11 +95,14 @@ export default class AdminPanelComponent extends Component<IAdminPanelProps, IAd
                </tbody>
           </table>
 
+
           return (
                <section className="global-section">
                     <header className="global-section__header">Admin panel</header>
 
-                    {userTable}
+
+
+                    {this.state.loading.global ? <LoadingComponent/> : userTable }
 
                </section>
           )
