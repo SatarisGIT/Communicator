@@ -26,17 +26,17 @@ namespace communicator.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult> GetUsers()
+        public async Task<IEnumerable<User>> GetUsers()
         {
             try
             {
                 var users = await _repository.User.GetAllUsersAsync();
-                return Ok(users);
+                return users;
             }
             catch (Exception e)
             {
                 _logger.LogError($"Error in GetUsers: {e}");
-                return NotFound();
+                return null;
             }
         }
 
