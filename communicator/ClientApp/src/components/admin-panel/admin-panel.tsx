@@ -41,6 +41,8 @@ export default class AdminPanelComponent extends Component<IAdminPanelProps, IAd
                          (data: User[]) => {
                               console.log('[state.users] => ', data)
 
+                              console.log(data)
+                              
                               let loading = this.state.loading;
                               loading.global = false;
                               this.setState({ users: data, loading: loading });
@@ -98,7 +100,7 @@ export default class AdminPanelComponent extends Component<IAdminPanelProps, IAd
           return (
                <section className="global-section">
                     <header className="global-section__header">Admin panel</header>
-
+               
                     {this.state.loading.global ? <LoadingComponent/> : userTable }
 
                </section>
