@@ -15,6 +15,8 @@ import AsideComponent from './components/aside/aside'
 import MessageBoxComponent from './components/message-box/message-box';
 import AdminPanelComponent from './components/admin-panel/admin-panel';
 import HomeComponent from './components/home/home';
+import LoginComponent from './components/login/login';
+
 
 class App extends Component {
 
@@ -29,6 +31,7 @@ class App extends Component {
                          <Route exact path="/" component={HomeComponent} />
                          <Route path="/admin" component={AdminPanelComponent} />
                          <Route path="/messages" component={MessageBoxComponent} />
+                         <Route path="/login" component={LoginComponent} />
                     </main>
 
                </div>

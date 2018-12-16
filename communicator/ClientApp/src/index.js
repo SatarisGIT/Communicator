@@ -5,6 +5,13 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faIgloo, faGlobe, faUser } from '@fortawesome/free-solid-svg-icons'
+library.add(faIgloo, faGlobe, faUser)
+
+
+
 const rootEl = document.getElementById('root')
 
 ReactDOM.render(

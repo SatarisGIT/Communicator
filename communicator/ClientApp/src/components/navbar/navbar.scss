@@ -1,17 +1,76 @@
 @import '../../index.scss';
 
 .navbar {
-     background-color: $main-dark-color;
-     height: $nav-height;
+     display: flex;
+
      position: fixed;
      top: 0;
+
+     z-index: map-get($z-indexes, navbar);
+
+     height: $nav-height;
      width: $nav-width;
-     display: flex;
-     
-     border: 1px solid white;
+
+     justify-content: space-between;
+     align-items: center;
+
+     padding: 0 20px;
+
+     background-color: darken($main-dark-color, 7);
+
+     border-top: 1px solid $main-border-first-color;
+     border-bottom: 1px solid $main-border-second-color;
+
+     border-left: 1px solid $main-border-first-color;
+     border-right: 1px solid $main-border-second-color;
+
+
      box-sizing: border-box;
+     border-bottom-right-radius: $sections-border-radius;
 
      a {
           color: white;
      }
+}
+
+
+.hamburger {
+
+     position: relative;
+
+     display: flex;
+     flex-direction: column;
+     justify-content: space-evenly;
+
+     height: $hamburger-size;
+     width: $hamburger-size;
+
+     &__line {
+          background: rgba(255, 255, 255, 0.4);
+          height: $hamburger-size/7;
+          border-radius: 5px;
+          width: $hamburger-size;
+     }
+}
+
+
+.menu-content {
+     position: absolute;
+     top: $nav-height + 10;
+     left: 10px;
+     
+     display: flex;
+     flex-direction: column;
+     justify-content: space-around;
+     align-items: center;
+
+     width: $nav-width - 20;
+     min-height: 150px;
+
+     box-sizing: border-box;
+     background: rgba(58, 58, 58, 0.9);
+     border: 2px solid rgba(0, 0, 0, 0.6);
+     border-radius: 20px;
+
+
 }

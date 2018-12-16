@@ -16,7 +16,7 @@
     "forceConsistentCasingInFileNames": false,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "importHelpers": true,
     "strictPropertyInitialization": false,
     "strictNullChecks": true,
