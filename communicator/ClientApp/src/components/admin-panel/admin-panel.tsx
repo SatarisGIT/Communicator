@@ -2,14 +2,10 @@ import React, { Component } from 'react'
 import HttpApi from '../../assets/lib/httpapi';
 import { Subscription } from 'rxjs';
 import { User } from '../../models/User';
-
-import toastr from 'toastr'
-
-import 'toastr/build/Admin'
-
-
+import toastr from 'toastr';
 import './admin-panel.scss';
 import LoadingComponent from '../loading/loading';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface IAdminPanelProps {
      any: any
@@ -64,14 +60,17 @@ export default class AdminPanelComponent extends Component<IAdminPanelProps, IAd
      }
 
 
+     handleEdit = (e: any | MouseEvent, userId: number) => {
+          toastr.info(`Tutaj nastąpi obsluga edytowania usera o id: ${userId} `, "Edycja");
+     }
+
+
+     handleDelete = (e: any | MouseEvent, userId: number) => {
+          toastr.info(`Tutaj nastąpi obsluga usuwania usera o id: ${userId} `, "Usuwanie");
+     }
+
+
      render() {
-
-
-
-          toastr.success("TEST!");
-          toastr.info('Are you the 6 fingered man?')
-
-
 
           let userTable = <table className='admin-panel-table'>
                <thead>
@@ -88,8 +87,8 @@ export default class AdminPanelComponent extends Component<IAdminPanelProps, IAd
                               <td>{user.id}</td>
                               <td>{user.nickname}</td>
                               <td>{user.password}</td>
-                              <td><button className="global-button global-button--orange">Edytuj</button></td>
-                              <td><button className="global-button global-button--red">Usuń</button></td>
+                              <td><button className="global-button global-button--orange" onClick={(e) => {this.handleEdit(e, user.id)}}>Edytuj</button></td>
+                              <td><button className="global-button global-button--red"  onClick={(e) => {this.handleDelete(e, user.id)}}>Usuń</button></td>
                          </tr>
                     )}
                </tbody>
@@ -99,8 +98,6 @@ export default class AdminPanelComponent extends Component<IAdminPanelProps, IAd
           return (
                <section className="global-section">
                     <header className="global-section__header">Admin panel</header>
-
-
 
                     {this.state.loading.global ? <LoadingComponent/> : userTable }
 

@@ -1,10 +1,12 @@
 @import './index.scss';
 
+
 .main {
-     background: lighten($main-dark-color, 10);
+     background: transparent;
      margin-left: $nav-width;
      min-height: 100vh;
 }
+
 
 // :not([data-component="NavbarComponent"]) {
 

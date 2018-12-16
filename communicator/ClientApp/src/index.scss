@@ -1,12 +1,47 @@
+//Reseter
 @import './reset.scss';
+button {
+     padding: 0;
+     margin: 0;
 
-$main-dark-color: #242e29;
-$nav-width: 300px;
+     background: transparent;
+     border: none;
+
+     outline: none;
+
+     &:active {
+          outline: none;
+     }
+}
+
+@import './toastr.scss';
+
+
+
+// $main-dark-color: #353535; //Gray
+$main-dark-color: #383d38;
+// $main-border-first-color: red;
+// $main-border-second-color: blue;
+$main-border-first-color: rgb(116, 116, 116);
+$main-border-second-color: rgb(214, 214, 214);
+
+$nav-width: 250px;
 $nav-height: 60px;
+
+$sections-border-radius: 20px;
+
+$hamburger-size: 40px;
+
+$z-indexes: (
+    navbar: 1
+);
+
 
 
 body {
      color: white;
+     background: lighten($main-dark-color, 10);
+
 }
 
 
@@ -41,19 +76,33 @@ body {
 
 
 .global-section {
+     min-height: calc(100vh - 72px);
 
-     padding-top: 70px;
+     margin-top: $nav-height;
+
 
      &__header {
           position: fixed;
           top: 0;
 
-          width: 100%;
+          display: flex;
+          align-items: center;
+
+          width: calc(100% - #{$nav-width});
           background: lighten($main-dark-color, 5);
           height: $nav-height;
 
-          border: 1px solid white;
+          padding-left: 20px;
+
           box-sizing: border-box;
+          box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
+          border-bottom-left-radius: $sections-border-radius;
+
+          color: #c7c7c7;
+          font-size: 2rem;
+          font-weight: 700;
+          text-shadow: 2px 2px 2px #727272;
+   
      }
 }
 
@@ -63,12 +112,12 @@ body {
  }
   
  ::-webkit-scrollbar-track {
-     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+     box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
      border-radius: 10px;
      background: rgba(255, 255, 255, 0.5);
  }
   
  ::-webkit-scrollbar-thumb {
      border-radius: 10px;
-     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+     box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
  }
