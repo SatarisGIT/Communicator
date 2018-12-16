@@ -1,0 +1,18 @@
+// $main-dark-color: #353535; //Gray
+$main-dark-color: #383d38;
+// $main-border-first-color: red;
+// $main-border-second-color: blue;
+$main-border-first-color: rgb(116, 116, 116);
+$main-border-second-color: rgb(214, 214, 214);
+
+$nav-width: 250px;
+$nav-height: 60px;
+
+$sections-border-radius: 20px;
+
+$hamburger-size: 40px;
+
+$z-indexes: (
+    navbar: 1,
+    modal: 2
+);

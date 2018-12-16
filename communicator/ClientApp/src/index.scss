@@ -15,33 +15,16 @@ button {
 }
 
 @import './toastr.scss';
+@import './modal.scss';
 
-
-
-// $main-dark-color: #353535; //Gray
-$main-dark-color: #383d38;
-// $main-border-first-color: red;
-// $main-border-second-color: blue;
-$main-border-first-color: rgb(116, 116, 116);
-$main-border-second-color: rgb(214, 214, 214);
-
-$nav-width: 250px;
-$nav-height: 60px;
-
-$sections-border-radius: 20px;
-
-$hamburger-size: 40px;
-
-$z-indexes: (
-    navbar: 1
-);
+@import './variables.scss';
 
 
 
 body {
      color: white;
      background: lighten($main-dark-color, 10);
-
+     background-image: linear-gradient(135deg, transparent 0%, transparent 50%, rgba(39, 73, 35, 0.21) 100%);
 }
 
 
@@ -66,6 +49,19 @@ body {
           color: #eaeaea;
      }
 
+     &--green {
+          background: #70cc70;
+          border: 2px solid #469a46;
+          color: #eaeaea;
+     }
+
+     &--lg {
+          height: 70px;
+          font-size: 1.7rem;
+          padding: 0 20px;
+          line-height: 70px;
+     }
+
 
      &:active {
           transform: translate(3px, 3px);
@@ -80,6 +76,12 @@ body {
 
      margin-top: $nav-height;
 
+
+     &__content {
+          padding: 30px;
+          flex-direction: column;
+          display: flex;
+     }
 
      &__header {
           position: fixed;
@@ -121,3 +123,8 @@ body {
      border-radius: 10px;
      box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
  }
+
+
+
+
+

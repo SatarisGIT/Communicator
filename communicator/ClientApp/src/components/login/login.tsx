@@ -2,7 +2,7 @@ import React, { Component, FormEvent } from 'react'
 
 export default class LoginComponent extends Component {
 
-     
+
      onSubmit = (e: FormEvent) => {
 
           e.preventDefault();
@@ -16,16 +16,16 @@ export default class LoginComponent extends Component {
                <section className="global-section">
                     <header className="global-section__header">Login</header>
 
-                    Login form
+                    <div className="global-section__content">
+                         Login form
+                         <form onSubmit={this.onSubmit}>
 
+                              <input type="text" name="user" />
+                              <input type="text" name="password" />
 
-                    <form onSubmit={this.onSubmit}>
-
-                         <input type="text" name="user" />
-                         <input type="text" name="password" />
-
-                         <button>Zaloguj!</button>
-                    </form>
+                              <button>Zaloguj!</button>
+                         </form>
+                    </div>
 
                </section>
           )

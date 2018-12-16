@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -15,9 +15,9 @@ library.add(faIgloo, faGlobe, faUser)
 const rootEl = document.getElementById('root')
 
 ReactDOM.render(
-     <Router>
+     <BrowserRouter>
           <App />
-     </Router>
+     </BrowserRouter>
      ,
      rootEl
 )

@@ -16,7 +16,7 @@ import MessageBoxComponent from './components/message-box/message-box';
 import AdminPanelComponent from './components/admin-panel/admin-panel';
 import HomeComponent from './components/home/home';
 import LoginComponent from './components/login/login';
-
+import AddUserComponent from './components/admin-panel/add-user/add-user';
 
 class App extends Component {
 

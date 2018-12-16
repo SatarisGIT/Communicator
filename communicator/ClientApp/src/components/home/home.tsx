@@ -21,9 +21,10 @@ export default class HomeComponent extends Component {
                <section className="global-section">
                     <header className="global-section__header">Strona glówna</header>
 
-                    Home page - zawarty zostanie tutaj opis aplikacji
-
-                    Tutaj też można testować komunikacje - ChatMessage
+                    <div className="global-section__content">
+                         Home page - zawarty zostanie tutaj opis aplikacji
+                         Tutaj też można testować komunikacje - ChatMessage
+                    </div>
 
 
                </section>
