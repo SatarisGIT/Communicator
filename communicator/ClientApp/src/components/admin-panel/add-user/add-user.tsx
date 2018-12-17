@@ -54,8 +54,6 @@ export default class AddUserComponent extends Component<IAddUserProps, IAddUserS
 
 
           this.setState({ loading: true });
-
-
           this.subscriptions$.add(
                HttpApi.post('/api/Users', toSend)
                     .subscribe(
@@ -79,9 +77,7 @@ export default class AddUserComponent extends Component<IAddUserProps, IAddUserS
 
           return (
                <div className="global-section__content">
-                    {/* <button className="global-button global-button--green global-button--lg admin-panel-component__add-user-button" onClick={this.handleDeleteSubmit}>Dodaj nowego użytkownika</button> */}
-
-
+  
                     <Link to="../" className="admin-panel-component__add-user-button">
                          <button
                               className="global-button global-button--orange global-button--lg">
@@ -90,7 +86,8 @@ export default class AddUserComponent extends Component<IAddUserProps, IAddUserS
                     </Link>
 
 
-                    {this.state.loading ? "LOADING!" : "nie loading.s"}
+                    {this.state.loading ? <LoadingComponent fly={true} /> : null }
+
 
                     <form onSubmit={this.handleSubmit} className="global-form add-user-form">
 

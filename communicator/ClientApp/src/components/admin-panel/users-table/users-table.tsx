@@ -40,7 +40,7 @@ export default class UserTableComponent extends Component<IUserTableProps, IUser
           };
      
      }
-     
+
 
      componentWillMount() {
           this.subscriptions$.add(
@@ -102,12 +102,12 @@ export default class UserTableComponent extends Component<IUserTableProps, IUser
                </thead>
                <tbody>
                     {this.state.users.map(user =>
-                         <tr key={'user_' + user.id}>
-                              <td>{user.id}</td>
+                         <tr key={'user_' + user.userId}>
+                              <td>{user.userId}</td>
                               <td>{user.nickname}</td>
                               <td>{user.password}</td>
-                              <td><button className="global-button global-button--orange" onClick={(e) => { this.handleEdit(e, user.id) }}>Edytuj</button></td>
-                              <td><button className="global-button global-button--red" onClick={(e) => { this.handleDelete(e, user.id) }}>Usuń</button></td>
+                              <td><button className="global-button global-button--orange" onClick={(e) => { this.handleEdit(e, user.userId) }}>Edytuj</button></td>
+                              <td><button className="global-button global-button--red" onClick={(e) => { this.handleDelete(e, user.userId) }}>Usuń</button></td>
                          </tr>
                     )}
                </tbody>

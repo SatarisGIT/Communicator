@@ -3,7 +3,7 @@ export class User {
      messagesReceived: Array<any>;
      userChannels: Array<any>;
      lazyLoader: any;
-     id: number;
+     userId: number;
      nickname: string;
      password: string;
      isLogged: boolean;
