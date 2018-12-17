@@ -19,9 +19,21 @@ namespace communicator.Migrations
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            modelBuilder.Entity("communicator.Models.Channel", b =>
+                {
+                    b.Property<int>("ChannelId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("ChannelId");
+
+                    b.ToTable("Channels");
+                });
+
             modelBuilder.Entity("communicator.Models.Message", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("MessageId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Content");
@@ -34,18 +46,18 @@ namespace communicator.Migrations
 
                     b.Property<int>("SenderID");
 
-                    b.HasKey("ID");
+                    b.HasKey("MessageId");
 
                     b.HasIndex("ReceiverID");
 
                     b.HasIndex("SenderID");
 
-                    b.ToTable("Message");
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("communicator.Models.User", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("IsAdmin");
@@ -56,9 +68,22 @@ namespace communicator.Migrations
 
                     b.Property<string>("Password");
 
-                    b.HasKey("ID");
+                    b.HasKey("UserId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("communicator.Models.UserChannel", b =>
+                {
+                    b.Property<int>("UserId");
+
+                    b.Property<int>("ChannelId");
+
+                    b.HasKey("UserId", "ChannelId");
+
+                    b.HasIndex("ChannelId");
+
+                    b.ToTable("UserChannels");
                 });
 
             modelBuilder.Entity("communicator.Models.Message", b =>
@@ -72,6 +97,19 @@ namespace communicator.Migrations
                         .WithMany("MessagesSent")
                         .HasForeignKey("SenderID")
                         .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("communicator.Models.UserChannel", b =>
+                {
+                    b.HasOne("communicator.Models.Channel", "Channel")
+                        .WithMany("UserChannels")
+                        .HasForeignKey("ChannelId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("communicator.Models.User", "User")
+                        .WithMany("UserChannels")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

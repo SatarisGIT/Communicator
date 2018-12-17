@@ -21,7 +21,8 @@ namespace communicator.Data
         
         public DbSet<User> Users { get; set; }
         public DbSet<Message> Messages { get; set; }
-        public DbSet<Message> MessageInfos { get; set; }
+        public DbSet<Channel> Channels { get; set; }
+        public DbSet<UserChannel> UserChannels { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,6 +37,9 @@ namespace communicator.Data
                 .WithMany(t => t.MessagesSent)
                 .HasForeignKey(m => m.SenderID)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<UserChannel>()
+                 .HasKey(uc => new { uc.UserId, uc.ChannelId });           
         }
 
         

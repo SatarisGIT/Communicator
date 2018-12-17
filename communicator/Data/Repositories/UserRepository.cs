@@ -61,7 +61,7 @@ namespace communicator.Data
         {
             try
             {
-                var user = await GetByConditionAsync(u => u.ID == id);
+                var user = await GetByConditionAsync(u => u.UserId == id);
                 return user.FirstOrDefault();
             }
             catch (Exception e)

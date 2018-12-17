@@ -7,12 +7,13 @@ namespace communicator.Models
 {
     public class User
     {
-        public int ID { get; set; }
+        public int UserId { get; set; }
         public string Nickname { get; set; }
         public string Password { get; set; }
         public bool IsLogged { get; set; }
         public bool IsAdmin { get; set; }
         public virtual ICollection<Message> MessagesSent { get; set; }
         public virtual ICollection<Message> MessagesReceived { get; set; }
+        public virtual ICollection<UserChannel> UserChannels { get; set; }
     }
 }
