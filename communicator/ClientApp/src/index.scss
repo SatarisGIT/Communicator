@@ -16,15 +16,13 @@ button {
 
 @import './toastr.scss';
 @import './modal.scss';
-
 @import './variables.scss';
 
 
 
 body {
      color: white;
-     background: lighten($main-dark-color, 10);
-     background-image: linear-gradient(135deg, transparent 0%, transparent 50%, rgba(39, 73, 35, 0.21) 100%);
+     background: lighten($main-dark-color, 5);
 }
 
 
@@ -71,6 +69,9 @@ body {
 }
 
 
+
+
+
 .global-section {
      min-height: calc(100vh - 72px);
 
@@ -88,24 +89,81 @@ body {
           top: 0;
 
           display: flex;
+          flex-direction: column;
           align-items: center;
 
+          justify-content: space-evenly;
+          align-items: flex-start;
+
           width: calc(100% - #{$nav-width});
-          background: lighten($main-dark-color, 5);
+          background: darken($main-dark-color, 5);
           height: $nav-height;
 
           padding-left: 20px;
 
           box-sizing: border-box;
-          box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
           border-bottom-left-radius: $sections-border-radius;
 
+          border-top: 1px solid $main-border-first-color;
+          border-bottom: 1px solid $main-border-second-color;
+     
+          border-left: 1px solid $main-border-first-color;
+          border-right: none;
+
           color: #c7c7c7;
-          font-size: 2rem;
+     }
+
+     &__header-top {
+          font-size: 1.3rem;
           font-weight: 700;
           text-shadow: 2px 2px 2px #727272;
-   
      }
+
+     &__header-bottom {
+          padding-left: 1rem;
+     }
+}
+
+
+.global-form { 
+     // background: red;
+     display: flex;
+     flex-direction: column;
+}
+
+
+.global-label {
+
+     display: flex;
+     flex-direction: column;
+     justify-content: space-around;
+
+     height: 4rem;
+
+     margin-top: 20px;
+
+     &:first-of-type {
+          margin-top: 0;
+     }
+
+     &:last-of-type {
+          margin-bottom: 20px;
+     }
+}
+
+
+.global-input { 
+     border: none;
+     background: white;
+
+     height: 2rem;
+     width: 100%;
+
+     border: 1px solid #{$main-border-first-color};
+     outline: none;
+
+     border-radius: 5px;
+
 }
 
 

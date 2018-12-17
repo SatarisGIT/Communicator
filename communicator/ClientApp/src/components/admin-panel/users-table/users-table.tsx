@@ -25,10 +25,10 @@ interface IUserTableState {
 
 export default class UserTableComponent extends Component<IUserTableProps, IUserTableState> {
 
-     subscriptions$: Subscription;
+     subscriptions$: Subscription = new Subscription();
 
-     constructor(props: any) {
-          super(props);
+     constructor(props) {
+          super(props)
 
           this.state = {
                users: [],
@@ -38,9 +38,11 @@ export default class UserTableComponent extends Component<IUserTableProps, IUser
                },
                deletingUserId: null
           };
+     
+     }
+     
 
-          this.subscriptions$ = new Subscription();
-
+     componentWillMount() {
           this.subscriptions$.add(
                HttpApi.get('/api/Users')
                     .subscribe(
@@ -59,9 +61,7 @@ export default class UserTableComponent extends Component<IUserTableProps, IUser
                          }
                     )
           )
-
      }
-
 
      componentWillUnmount() {
           this.subscriptions$.unsubscribe();

@@ -1,4 +1,5 @@
 import React, { Component, FormEvent } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default class LoginComponent extends Component {
 
@@ -14,7 +15,17 @@ export default class LoginComponent extends Component {
      render() {
           return (
                <section className="global-section">
-                    <header className="global-section__header">Login</header>
+                    <header className="global-section__header">
+
+                         <div className="global-section__header-top">
+                              <FontAwesomeIcon icon={'comment'} /> Login
+                         </div>
+
+                         <div className="global-section__header-bottom">
+                              Formularz logowania
+                         </div>
+
+                    </header>
 
                     <div className="global-section__content">
                          Login form

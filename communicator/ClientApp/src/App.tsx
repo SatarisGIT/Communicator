@@ -61,7 +61,7 @@ export class FetchData extends Component<any, any> {
                HttpApi.get('https://jsonplaceholder.typicode.com/users')
                     .subscribe(
                          (data: any) => {
-                              console.log('[data!12] => ', data)
+                              console.log('[data!] => ', data)
                               this.setState({ forecasts: data, loading: false });
                          }
                     )

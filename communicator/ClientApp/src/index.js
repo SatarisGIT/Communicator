@@ -7,9 +7,8 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faIgloo, faGlobe, faUser } from '@fortawesome/free-solid-svg-icons'
-library.add(faIgloo, faGlobe, faUser)
-
+import { faGlobe, faUser, faComment, faSpinner } from '@fortawesome/fontawesome-free-solid'
+library.add(faGlobe, faUser, faComment, faSpinner)
 
 
 const rootEl = document.getElementById('root')
@@ -21,6 +20,7 @@ ReactDOM.render(
      ,
      rootEl
 )
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

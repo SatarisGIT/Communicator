@@ -68,9 +68,8 @@
      min-height: 150px;
 
      box-sizing: border-box;
-     background: rgba(58, 58, 58, 0.9);
-     border: 2px solid rgba(0, 0, 0, 0.6);
-     border-radius: 20px;
-
+     background: rgba($color: lighten(#3f3f3f, 10), $alpha: 0.95);
+     border: 1px solid rgba(255, 255, 255, 0.6);
+     border-radius: 5px;
 
 }

@@ -10,25 +10,29 @@ import Modal from 'react-modal';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 
-interface IAddUserProps {}
+interface ControllerAddUserForm extends EventTarget {
+     name: HTMLInputElement,
+     password: HTMLInputElement,
+     admin: HTMLInputElement,
+}
 
 
-interface IAddUserState {}
+
+interface IAddUserProps { 
+     loading: boolean
+}
+
+interface IAddUserState { }
 
 
 export default class AddUserComponent extends Component<IAddUserProps, IAddUserState> {
 
-     subscriptions$: Subscription;
 
-     constructor(props: any) {
-          super(props);
+     state = {
+          loading: false
+     };
 
-          this.state = {};
-
-          this.subscriptions$ = new Subscription();
-
-
-     }
+     subscriptions$: Subscription = new Subscription();
 
 
      componentWillUnmount() {
@@ -36,9 +40,42 @@ export default class AddUserComponent extends Component<IAddUserProps, IAddUserS
      }
 
 
+     handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+          e.preventDefault();
+
+          let form = (e.target as ControllerAddUserForm);
+          let toSend = new User();
+
+          toSend.nickname = form.name.value;
+          toSend.password = form.password.value;
+          toSend.isAdmin = !!form.admin.checked;
+
+          console.warn("Submited...", toSend);
+
+
+          this.setState({ loading: true });
+
+
+          this.subscriptions$.add(
+               HttpApi.post('/api/Users', toSend)
+                    .subscribe(
+                         (data: User) => {
+                              console.log('[user added] => ', data)
+                              this.setState({ loading: false });
+                         },
+
+                         (err: any) => {
+                              console.error(err);
+                              this.setState({ loading: false });
+                         }
+                    )
+          )
+
+          
+     }
+
 
      render() {
-
 
           return (
                <div className="global-section__content">
@@ -52,7 +89,29 @@ export default class AddUserComponent extends Component<IAddUserProps, IAddUserS
                          </button>
                     </Link>
 
-                    ADD USER FORM.
+
+                    {this.state.loading ? "LOADING!" : "nie loading.s"}
+
+                    <form onSubmit={this.handleSubmit} className="global-form add-user-form">
+
+                         <label className="global-label">
+                              <div>Nick</div>
+                              <input className="global-input" name="name" required />
+                         </label>
+
+                         <label className="global-label">
+                              <div>Hasło</div>
+                              <input className="global-input" name="password" required />
+                         </label>
+                         
+                         <label className="global-label">
+                              <div>Administrator</div>
+                              <input className="global-input" name="admin" type="checkbox" />
+                         </label>
+
+                         <button className="global-button global-button--green global-button--lg">Utwórz</button>
+
+                    </form>
 
                </div>
           )
