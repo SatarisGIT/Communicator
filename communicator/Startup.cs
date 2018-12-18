@@ -2,8 +2,6 @@ using communicator.Data;
 using communicator.Data.Interfaces;
 using communicator.Data.Repositories;
 using communicator.Hubs;
-using communicator.Interfaces;
-using communicator.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -39,8 +37,6 @@ namespace communicator
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSignalR();
-
-            services.AddSingleton<IChatService, ChatService>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

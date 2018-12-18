@@ -9,10 +9,26 @@ namespace communicator.Hubs
 {
     public class ChatHub : Hub
     {
-        public async Task SendMessage(User user, Message message)
+        public async Task JoinGroup(string groupName)
         {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
-            //await Clients.User(user.ID.ToString()).SendAsync("ReceiveMessage", user, message);
+            await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+            await Clients.Group(groupName).SendAsync("Send", $"{Context.ConnectionId} has joined the group {groupName}.");
+        }
+
+        public async Task LeaveGroup(string groupName)
+        {
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
+            await Clients.Group(groupName).SendAsync("Send", $"{Context.ConnectionId} has left the group {groupName}.");
+        }
+
+        public async Task SendPrivateMessage(User user, Message message)
+        {
+            await Clients.User(user.UserId.ToString()).SendAsync("ReceiveMessage", user, message);
+        }
+
+        public async Task SendGroupMessage(string groupName, Message message)
+        {
+            await Clients.Group(groupName).SendAsync("ReceiveMessage", message);
         }
     }
 }
