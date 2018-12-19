@@ -4,7 +4,6 @@ import './App.scss';
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-
 import { Observable, Subscription } from 'rxjs';
 import axios from 'axios';
 
@@ -44,6 +43,7 @@ export default App;
 
 
 
+
 //For test purposes
 export class FetchData extends Component<any, any> {
      displayName = FetchData.name
@@ -55,7 +55,6 @@ export class FetchData extends Component<any, any> {
           this.state = { forecasts: [], loading: true };
 
           this.subscriptions$ = new Subscription();
-
 
           this.subscriptions$.add(
                HttpApi.get('https://jsonplaceholder.typicode.com/users')
@@ -70,6 +69,7 @@ export class FetchData extends Component<any, any> {
           this.subscriptions$.unsubscribe();
 
      }
+
 
      static renderForecastsTable(forecasts: Array<any>) {
           return (
