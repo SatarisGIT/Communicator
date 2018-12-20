@@ -3,8 +3,8 @@ import './home.scss'
 import { ChatMessage } from '../../models/ChatMessage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export default class HomeComponent extends Component {
 
+export default class HomeComponent extends Component {
 
 
      render() {

@@ -1,33 +1,47 @@
 import React, { Component } from 'react'
 import './message-box.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import ChatWebsocketService from '../../services/ChatWebsocketService'
 
-export default class MessageBoxComponent extends Component {
+interface IMessageBoxProps {
+     match: {
+          isExact: boolean
+          params: {
+               groupName: string;
+          }
+          path: string;
+          url: string;
+     }
+}
 
-     ChatWebsocketService = new ChatWebsocketService("NAZWA GRUPY");
 
-     
-     // componentWillMount() {
-     //      
-     // }
+interface IMessageBoxState {
+
+}
 
 
-     componentWillUnmount() {
-          this.ChatWebsocketService.disconnect();
+export default class MessageBoxComponent extends Component<IMessageBoxProps, IMessageBoxState> {
+
+
+     componentWillMount() {
+
+          console.error(this.props.match.params.groupName)
+          // console.error(this)
+          // console.error(this)
+          // console.error(this)
+          // console.error(this)
+          // console.error(this)
+          // console.error(this)
+          // console.error(this)
+          // console.error(this)
+          // this.props
+
+          // this.props.match.params
+
      }
 
-     sendMsg() {
-          console.log("WYSYLAM WIADOMOSC")
 
-          this.ChatWebsocketService.send("TEST MSG");
-     }
-
-     
-     
      render() {
 
-          console.log(this.ChatWebsocketService.connection)
 
           return (
                <section className="global-section">
@@ -45,9 +59,6 @@ export default class MessageBoxComponent extends Component {
 
 
                     <div className="global-section__content">
-
-                    <button onClick={this.sendMsg}>SEND!</button>
-
 
                          Wiadomosci....<br />Wiadomosci....<br />Wiadomosci....<br />Wiadomosci....<br />Wiadomosci....<br />Wiadomosci....<br />
                          Wiadomosci....<br />Wiadomosci....<br />Wiadomosci....<br />Wiadomosci....<br />Wiadomosci....<br />Wiadomosci....<br />
