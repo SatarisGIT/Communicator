@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Channels } from '../../App.context';
 
 interface IAsideProps {
-     
+
 }
 
 
@@ -23,9 +23,6 @@ export default class AsideComponent extends Component<IAsideProps, IAsideState> 
 
      channelsElement() {
 
-          console.log(`\n\n\n\n`)
-          console.log(this.context)
-          console.log(`\n\n\n\n`)
 
           let channels: Array<JSX.Element> = [];
 

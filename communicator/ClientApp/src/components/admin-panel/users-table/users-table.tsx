@@ -47,9 +47,9 @@ export default class UserTableComponent extends Component<IUserTableProps, IUser
                HttpApi.get('/api/Users')
                     .subscribe(
                          (data: User[]) => {
-                              console.log('[state.users] => ', data)
-
-                              console.log(data)
+                              
+                              // console.log('[state.users] => ', data)
+                              // console.log(data)
 
                               let loading = this.state.loading;
                               loading.global = false;

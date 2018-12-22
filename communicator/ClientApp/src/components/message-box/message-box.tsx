@@ -86,8 +86,8 @@ export default class MessageBoxComponent extends Component<IMessageBoxProps, IMe
                     <div className="global-section__content">
 
                          Wiadomosci....<br />Wiadomosci....<br />Wiadomosci....<br />Wiadomosci....<br />Wiadomosci....<br />Wiadomosci....<br />
-
-
+ 
+                         <button onClick={() => {currentWebsocket.send("SEND! C:C :CC:C:")}}>xxxxxxxxxx</button>
                     </div>
 
 

@@ -18,24 +18,24 @@ class ChatWebsocketService {
           this.groupName = groupName;
           this.id = id;
 
-          // const connection = new HubConnectionBuilder()
-          //      .withUrl("/chatHub")
-          //      .configureLogging(LogLevel.Information)
-          //      .build()
+          const connection = new HubConnectionBuilder()
+               .withUrl("/chatHub")
+               .configureLogging(LogLevel.Information)
+               .build()
 
-          // connection
-          //      .start()
-          //      .then(xx => {
-          //           console.log(`%cChat service: Połączenie z grupą ${groupName} zostało nawiazane`, "font-size: 1.1rem;color: green;")
-          //      })
-          //      .catch(xx => {
-          //           console.log(`%cChat service: Połączenie z grupą ${groupName} NIE zostało nawiazane`, "font-size: 1.1rem;color: green;")
-          //      })
+          connection
+               .start()
+               .then(xx => {
+                    console.log(`%cChat service: Połączenie z grupą ${groupName} zostało nawiazane`, "font-size: 1.1rem;color: green;")
+               })
+               .catch(xx => {
+                    console.log(`%cChat service: Połączenie z grupą ${groupName} NIE zostało nawiazane`, "font-size: 1.1rem;color: red;")
+               })
 
-          // this.connection = connection;
-          // console.log("Connection from service: ", connection)
+          this.connection = connection;
+          console.log("Connection from service: ", connection)
+          console.log(`Dołączanie do grupy: ${groupName}`)
 
-          // console.log(`Dołączanie do grupy: ${groupName}`)
 
           // this.connection
           //      .invoke('JoinGroup', "NAZWA GRUPY")
@@ -91,7 +91,7 @@ class ChatWebsocketService {
           message.senderID = 2
 
           this.connection
-               .invoke('SendGroupMessage', "NAZWA GRUPY", message)
+               .invoke('SendGroupMessage', "xxx", message)
                .catch(err => console.error(err));
 
           // this.connection

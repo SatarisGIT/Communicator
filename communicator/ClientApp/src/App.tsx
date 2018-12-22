@@ -42,11 +42,12 @@ export default class App extends Component<IAppProps, IAppState> {
      returnChannels(): Array<Channel> {
           let result: any = []
 
-          for (let i = 0; i < 10; i++) {
+          for (let i = 0; i < 1; i++) {
 
                let type = i > 5 ? "public" : "user"
 
-               let channel = new Channel(i, `Kanał nr: ${i}`, type)
+               // let channel = new Channel(i, `XKanał nr: ${i}`, type)
+               let channel = new Channel(i, `yyy`, type)
                result.push(channel)
 
           }
@@ -92,7 +93,7 @@ export default class App extends Component<IAppProps, IAppState> {
      render() {
 
           let { channels } = this.state;
- 
+
           return (
                <Channels.Provider value={channels}>
 
