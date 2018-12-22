@@ -78,6 +78,8 @@ body {
      margin-top: $nav-height;
 
 
+
+
      &__content {
           padding: 30px;
           flex-direction: column;
@@ -157,7 +159,6 @@ body {
      background: white;
 
      height: 2rem;
-     width: 100%;
 
      border: 1px solid #{$main-border-first-color};
      outline: none;

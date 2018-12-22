@@ -30,8 +30,6 @@ serviceWorker.unregister();
 
 
 // add these lines
-if (module.hot && process.env.NODE_ENV !== 'production') {
-
-     console.warn("HOT!")
-     module.hot.accept();
-}
+// if (module.hot && process.env.NODE_ENV !== 'production') {
+//      module.hot.accept();
+// }

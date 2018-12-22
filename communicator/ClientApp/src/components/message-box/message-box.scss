@@ -1,2 +1,25 @@
 @import '../../index.scss';
 
+.MessageBoxComponent {
+
+     position: relative;
+     margin-bottom: 60px;
+
+     .message-form {
+          position: fixed;
+          bottom: 20px;
+          width: 100%;
+          
+          display: flex;
+          max-width: calc(100vw - #{$nav-width} - 30px - 20px);
+
+
+          &__input {
+               flex: 1;
+               height: 70px;
+          }
+
+     }
+
+
+}
