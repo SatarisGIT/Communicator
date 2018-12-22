@@ -16,3 +16,9 @@
 
 \.vs/communicator/v15/
 >>>>>>> DatabaseConnection
+communicator.Tests/obj/project.assets.json
+communicator.Tests/obj/communicator.Tests.csproj.nuget.g.props
+communicator.Tests/obj/communicator.Tests.csproj.nuget.cache
+communicator.Tests/obj/Debug/netcoreapp2.1/communicator.Tests.csprojAssemblyReference.cache
+communicator.Tests/obj/Debug/netcoreapp2.1/communicator.Tests.csproj.CoreCompileInputs.cache
+communicator.Tests/obj/Debug/netcoreapp2.1/communicator.Tests.assets.cache
