@@ -6,32 +6,34 @@ import { Message } from '../models/Message';
 
 class ChatWebsocketService {
 
+     public id: number;
      public groupName: string;
      public connection: HubConnection;
 
 
-     constructor(groupName: string) {
+     constructor(id: number, groupName: string) {
 
-          console.log("%cChat service has been invoked.", "font-size: 1.3rem;color: gray;")
+          // console.log("%cChat service has been invoked.", "font-size: 1.3rem;color: gray;")
 
           this.groupName = groupName;
+          this.id = id;
 
-          const connection = new HubConnectionBuilder()
-               .withUrl("/chatHub")
-               .configureLogging(LogLevel.Information)
-               .build()
+          // const connection = new HubConnectionBuilder()
+          //      .withUrl("/chatHub")
+          //      .configureLogging(LogLevel.Information)
+          //      .build()
 
-          connection
-               .start()
-               .then(xx => {
-                    console.log(`%cChat service: Połączenie z grupą ${groupName} zostało nawiazane`, "font-size: 1.1rem;color: green;")
-               })
-               .catch(xx => {
-                    console.log(`%cChat service: Połączenie z grupą ${groupName} NIE zostało nawiazane`, "font-size: 1.1rem;color: green;")
-               })
+          // connection
+          //      .start()
+          //      .then(xx => {
+          //           console.log(`%cChat service: Połączenie z grupą ${groupName} zostało nawiazane`, "font-size: 1.1rem;color: green;")
+          //      })
+          //      .catch(xx => {
+          //           console.log(`%cChat service: Połączenie z grupą ${groupName} NIE zostało nawiazane`, "font-size: 1.1rem;color: green;")
+          //      })
 
-          this.connection = connection;
-          console.log("Connection from service: ", connection)
+          // this.connection = connection;
+          // console.log("Connection from service: ", connection)
 
           // console.log(`Dołączanie do grupy: ${groupName}`)
 

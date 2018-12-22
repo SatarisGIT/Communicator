@@ -18,6 +18,7 @@ import LoginComponent from './components/login/login';
 import AddUserComponent from './components/admin-panel/add-user/add-user';
 import { Channel } from './models/Channel';
 import ChatWebsocketService from './services/ChatWebsocketService';
+import { Channels } from './App.context';
 
 interface IAppProps {
 
@@ -25,7 +26,7 @@ interface IAppProps {
 
 
 interface IAppState {
-     channels: Map<string, ChatWebsocketService>
+     channels: Map<number, ChatWebsocketService>,
 }
 
 
@@ -34,7 +35,7 @@ export default class App extends Component<IAppProps, IAppState> {
      // ChatWebsocketService = new ChatWebsocketService("NAZWA GRUPY");
 
      state = {
-          channels: new Map<string, ChatWebsocketService>()
+          channels: new Map<number, ChatWebsocketService>(),
      }
 
 
@@ -66,11 +67,7 @@ export default class App extends Component<IAppProps, IAppState> {
                let response: Array<Channel> = this.returnChannels();
 
                for (let channel of response) {
-                    channels.set(channel.name, new ChatWebsocketService(channel.name));
-               }
-
-               for (let key of channels.keys()) {
-                    console.warn(key)
+                    channels.set(channel.id, new ChatWebsocketService(channel.id, channel.name));
                }
 
                this.setState({
@@ -95,20 +92,25 @@ export default class App extends Component<IAppProps, IAppState> {
      render() {
 
           let { channels } = this.state;
-
+ 
           return (
-               <div>
-                    <NavbarComponent></NavbarComponent>
-                    <AsideComponent channels={channels} ></AsideComponent>
+               <Channels.Provider value={channels}>
 
-                    <main className="main">
-                         <Route exact path="/" component={HomeComponent} />
-                         <Route path="/admin" component={AdminPanelComponent} />
-                         <Route path="/messages/:groupName" component={MessageBoxComponent} />
-                         <Route path="/login" component={LoginComponent} />
-                    </main>
+                    <div>
+                         <NavbarComponent></NavbarComponent>
+                         <AsideComponent></AsideComponent>
 
-               </div>
+                         <main className="main">
+                              <Route exact path="/" component={HomeComponent} />
+                              <Route path="/admin" component={AdminPanelComponent} />
+                              <Route path="/messages/:groupId" component={MessageBoxComponent} />
+                              <Route path="/login" component={LoginComponent} />
+                         </main>
+
+
+
+                    </div>
+               </Channels.Provider>
           );
      }
 }
