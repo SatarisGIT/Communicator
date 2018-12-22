@@ -9,7 +9,7 @@ class ChatWebsocketService {
      public id: number;
      public groupName: string;
      public connection: HubConnection;
-
+     public messages: Message[];
 
      constructor(id: number, groupName: string) {
 
@@ -17,6 +17,7 @@ class ChatWebsocketService {
 
           this.groupName = groupName;
           this.id = id;
+          this.messages = [];
 
           const connection = new HubConnectionBuilder()
                .withUrl("/chatHub")
@@ -25,27 +26,30 @@ class ChatWebsocketService {
 
           connection
                .start()
-               .then(xx => {
-                    console.log(`%cChat service: Połączenie z grupą ${groupName} zostało nawiazane`, "font-size: 1.1rem;color: green;")
-               })
-               .catch(xx => {
-                    console.log(`%cChat service: Połączenie z grupą ${groupName} NIE zostało nawiazane`, "font-size: 1.1rem;color: red;")
-               })
+                    .then(xx => {
+                         console.log(`%cChat service: Połączenie z grupą ${groupName} zostało nawiazane`, "font-size: 1.1rem;color: green;")
+
+                              this.connection
+                                   .invoke('JoinGroup', groupName)
+                                   .then(response => {
+                                        console.log(`Dołączono do grupy: ${groupName}`)
+                                        console.log(response)
+                                   })
+                                   .catch(err => console.error(err));
+
+                    })
+                    .catch(xx => {
+                         console.log(`%cChat service: Połączenie z grupą ${groupName} NIE zostało nawiazane`, "font-size: 1.1rem;color: red;")
+                    })
 
           this.connection = connection;
-          console.log("Connection from service: ", connection)
-          console.log(`Dołączanie do grupy: ${groupName}`)
 
 
-          // this.connection
-          //      .invoke('JoinGroup', "NAZWA GRUPY")
-          //      .then(response => {
-          //           console.log(`Dołączono do grupy: ${groupName}`)
-          //           console.log(response)
-          //      })
-          //      .catch(err => console.error(err));
-
-
+          this.connection.on('ReceiveMessage', (message: Message) => {
+               this.messages.push(message);
+               console.log(`Wiadomość do ${this.id}/${this.groupName}`, message)
+               this.onMessage(message);
+          })
 
           // connection.on('sendToAll', (nick, receivedMessage) => {
           //      const text = `${nick}: ${receivedMessage}`;
@@ -55,43 +59,41 @@ class ChatWebsocketService {
      }
 
 
-
      disconnect() {
           console.log("%cChat service: Połączenie zostaje kończone...", "font-size: 1.1rem;color: red;")
           this.connection.stop();
      }
 
 
+     onMessage = (message: Message) => {}
+
 
      send = (messageString: string) => {
-          console.log("MESSAGE")
-          console.log(messageString)
-
+          console.log(`Message sent: `, messageString)
 
           let user = new User();
-
-          user.isAdmin = false;
-          user.isLogged = false;
-          user.lazyLoader = false;
-          user.messagesReceived = [];
-          user.messagesSent = [];
-          user.nickname = "lalalla";
-          user.password = "lalala C:";
-          user.userChannels = [];
-          user.userId = 2;
+               user.nickname = "NickName!";
+               // user.isAdmin = false;
+               // user.isLogged = false;
+               // user.lazyLoader = false;
+               // user.messagesReceived = [];
+               // user.messagesSent = [];
+               // user.password = "";
+               // user.userChannels = [];
+               // user.userId = 2;
 
 
           let message = new Message();
-          message.content = "lalal";
-          message.dateSend = new Date()
-          message.messageId = 1
-          // message.receiver = 1
-          message.receiverID = 1
-          // message.sender = 
-          message.senderID = 2
+               message.content = messageString;
+               message.dateSend = new Date()
+               message.messageId = 1
+               // message.receiver = 1
+               message.receiverID = 1
+               message.sender = user
+               message.senderID = 2
 
           this.connection
-               .invoke('SendGroupMessage', "xxx", message)
+               .invoke('SendGroupMessage', this.groupName, message)
                .catch(err => console.error(err));
 
           // this.connection
