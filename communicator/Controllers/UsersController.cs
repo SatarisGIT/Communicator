@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using communicator.Data;
 using communicator.Data.Interfaces;
+using communicator.Interfaces;
 using communicator.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -16,12 +18,35 @@ namespace communicator.Controllers
     public class UsersController : ControllerBase
     {
         private IRepositoryWrapper _repository;
+        private IUserService _userService;
         private ILogger<UsersController> _logger;
 
-        public UsersController(IRepositoryWrapper repository, ILogger<UsersController> logger)
+        public UsersController(IRepositoryWrapper repository, ILogger<UsersController> logger, IUserService service)
         {
             _repository = repository;
             _logger = logger;
+            _userService = service;
+        }
+
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate([FromBody]User userParam)
+        {
+            var user = _userService.Authenticate(userParam.Nickname, userParam.Password);
+
+            if(user == null)
+            {
+                return BadRequest(new { message = "Username or password is incorrect " });
+            }
+
+            return Ok(user);
+        }
+
+        [HttpGet("getallwithoutpasswords")]
+        public IActionResult GetAllWithoutPasswords()
+        {
+            var users = _userService.GetAllWithoutPasswords();
+            return Ok(users);
         }
 
         // GET: api/Users
