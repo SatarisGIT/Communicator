@@ -11,6 +11,7 @@ namespace communicator.Data.Repositories
     {
         private CommunicatorContext _context;
         private IUserRepository _user;
+        private IChannelRepository _channel;
 
         public IUserRepository User
         {
@@ -22,6 +23,19 @@ namespace communicator.Data.Repositories
                 }
 
                 return _user;
+            }
+        }
+
+        public IChannelRepository Channel
+        {
+            get
+            {
+                if (_channel == null)
+                {
+                    _channel = new ChannelRepository(_context, null);
+                }
+
+                return _channel;
             }
         }
 

@@ -8,5 +8,6 @@ namespace communicator.Data.Interfaces
     public interface IRepositoryWrapper
     {
         IUserRepository User { get; }
+        IChannelRepository Channel { get; }
     }
 }
