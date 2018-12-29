@@ -16,7 +16,7 @@
 
      padding: 0 20px;
 
-     background-color: darken($main-dark-color, 7);
+     background-color: $main-dark-color;
 
      border-top: 1px solid $main-border-first-color;
      border-bottom: 1px solid $main-border-second-color;
@@ -31,6 +31,10 @@
      a {
           color: white;
      }
+     a:hover{
+          font-size:19px;
+          transition: 0.2ms;
+     }
 }
 
 
@@ -44,7 +48,7 @@
 
      height: $hamburger-size;
      width: $hamburger-size;
-
+     transition: 0.2s;
      &__line {
           background: rgba(255, 255, 255, 0.4);
           height: $hamburger-size/7;
@@ -53,6 +57,11 @@
      }
 }
 
+.hamburger:hover{
+     width:$hamburger-size+10;
+     height:$hamburger-size+10;
+     transition: 0.2s;
+}
 
 .menu-content {
      position: absolute;
@@ -68,7 +77,7 @@
      min-height: 150px;
 
      box-sizing: border-box;
-     background: rgba($color: lighten(#3f3f3f, 10), $alpha: 0.95);
+     background: rgba($color: rgb(102, 149, 161), $alpha: 0.90);
      border: 1px solid rgba(255, 255, 255, 0.6);
      border-radius: 5px;
 

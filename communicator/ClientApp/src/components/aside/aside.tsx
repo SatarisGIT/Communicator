@@ -30,7 +30,7 @@ export default class AsideComponent extends Component<IAsideProps, IAsideState> 
 
                channels.push(
                     <li key={`channel__${channel.id}`} className="channels-area__channel">
-                         <Link to={`/messages/${channel.id}`}><FontAwesomeIcon icon="globe" /> {channel.groupName}</Link>
+                         <Link className="channels-area__channel" to={`/messages/${channel.id}`}><FontAwesomeIcon icon="globe" /> {channel.groupName}</Link>
                     </li>
                )
 

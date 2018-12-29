@@ -25,41 +25,82 @@ body {
      background: lighten($main-dark-color, 5);
 }
 
+.button-submit{
+     width: 70px;
+    height: 30px;
+    color: white;
+    border-radius: 5px;
+    margin-top: 10px;
+    background: #004e63;
+     
+}
 
 .global-button {
      padding: 10px;
      border-radius: 5px;
      outline: none;
-     background: #d2d2d2;
-     border: 2px solid #a5a5a5;
-     box-shadow: inset -3px -3px 10px 0px rgba(0, 0, 0, 0.5);
+
      transition: 0.2s;
 
      &--orange {
           background: #d29c57;
-          border: 2px solid #966d38;
+         
+          color: #eaeaea;
+     }
+     &--orange:hover {
+          background: darken(#d29c57,10%);
+         
+          color: #eaeaea;
+     }
+     &--blue {
+          background: #004e63;
+         
+          color: #eaeaea;
+     }
+     &--blue:hover {
+          background: darken(#004e63,10%);
+         
           color: #eaeaea;
      }
 
      &--red {
           background: #cc7070;
-          border: 2px solid #9a4646;
+          
+          color: #eaeaea;
+     }
+     &--red:hover {
+          background: darken(#cc7070,10%);
+          
           color: #eaeaea;
      }
 
      &--green {
           background: #70cc70;
-          border: 2px solid #469a46;
+          
+          color: #eaeaea;
+     }
+     &--green:hover {
+          background: darken(#70cc70,10%);
+          
           color: #eaeaea;
      }
 
      &--lg {
-          height: 70px;
+          height: 77px;
           font-size: 1.7rem;
           padding: 0 20px;
           line-height: 70px;
+          margin-left:10px;
+     }
+     
+     &--adduser{
+          font-size: 15px;
+           font-weight: 800;
      }
 
+     &--login{
+          font-size:15px;
+     }
 
      &:active {
           transform: translate(3px, 3px);
@@ -76,7 +117,8 @@ body {
      min-height: calc(100vh - 72px);
 
      margin-top: $nav-height;
-
+     
+     color:black;
 
 
 
@@ -98,7 +140,7 @@ body {
           align-items: flex-start;
 
           width: calc(100% - #{$nav-width});
-          background: darken($main-dark-color, 5);
+          background: $main-dark-color;
           height: $nav-height;
 
           padding-left: 20px;
@@ -112,7 +154,8 @@ body {
           border-left: 1px solid $main-border-first-color;
           border-right: none;
 
-          color: #c7c7c7;
+          color: white;
+          float:right;
      }
 
      &__header-top {

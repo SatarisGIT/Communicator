@@ -1,14 +1,21 @@
 .admin-panel-table {
      background: rgba(0, 0, 0, 0.5);
      margin: 0 auto;
-     min-width: 75%;
+     min-width: 50%;
      padding: 10px;
      border-radius: 10px;
-
-     td, th {
+     text-align:center;
+     td{
           padding: 15px;
           height: 50px;
           vertical-align: middle;
+     }
+     th{
+          background-color: #004e63;
+          padding: 15px;
+          height: 20px;
+          vertical-align: middle;
+          color:white;
      }
 
 }

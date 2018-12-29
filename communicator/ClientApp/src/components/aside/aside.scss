@@ -48,21 +48,29 @@
      }
 
      &__title {
-          color: #a5a5a5;
+          color: white;
           font-weight: 800;
           font-size: 1.2rem;
      }
      
      &__channels-list {
           padding-left: 10px;
+          color:white;
      }
+
      
      &__channel {
           color: #dfdfdf;
           margin-top: 10px;
-
+          transition: 0.2ms;
           &:last-child {
                margin-bottom: 10px;
           }
      }
+     &__channel:hover {
+        font-size:17px;
+        transition: 0.2ms;
+     }
+    
+    
 }

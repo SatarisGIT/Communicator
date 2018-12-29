@@ -1,6 +1,6 @@
 import React, { Component, FormEvent } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import './login.scss';
 export default class LoginComponent extends Component {
 
 
@@ -28,13 +28,16 @@ export default class LoginComponent extends Component {
                     </header>
 
                     <div className="global-section__content">
-                         Login form
+                         
                          <form onSubmit={this.onSubmit}>
-
+                              Login:<br></br>
                               <input type="text" name="user" />
-                              <input type="text" name="password" />
-
-                              <button>Zaloguj!</button>
+                              <br></br>
+                              Hasło: <br></br>
+                              <input type="password" name="password" />
+                              <br></br>
+                              <button className="button-submit">Zaloguj!</button>
+                              
                          </form>
                     </div>
 

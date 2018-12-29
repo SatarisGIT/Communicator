@@ -97,7 +97,7 @@ export default class UserTableComponent extends Component<IUserTableProps, IUser
                          <th>ID</th>
                          <th>Nick</th>
                          <th>Password</th>
-                         <th colSpan={2}>Akcje</th>
+                         <th>Akcje</th>
                     </tr>
                </thead>
                <tbody>
@@ -106,8 +106,7 @@ export default class UserTableComponent extends Component<IUserTableProps, IUser
                               <td>{user.userId}</td>
                               <td>{user.nickname}</td>
                               <td>{user.password}</td>
-                              <td><button className="global-button global-button--orange" onClick={(e) => { this.handleEdit(e, user.userId) }}>Edytuj</button></td>
-                              <td><button className="global-button global-button--red" onClick={(e) => { this.handleDelete(e, user.userId) }}>Usuń</button></td>
+                              <td className="actions"><button className="global-button global-button--orange actions--buttons" onClick={(e) => { this.handleEdit(e, user.userId) }}>Edytuj</button><button className="global-button global-button--red" onClick={(e) => { this.handleDelete(e, user.userId) }}>Usuń</button></td>
                          </tr>
                     )}
                </tbody>
@@ -118,7 +117,7 @@ export default class UserTableComponent extends Component<IUserTableProps, IUser
 
                     <Link to="/add" className="admin-panel-component__add-user-button">
                          <button
-                              className="global-button global-button--green global-button--lg">
+                              className="global-button global-button--green global-button--lg global-button--adduser">
                               Dodaj nowego użytkownika
                          </button>
                     </Link>

@@ -39,7 +39,7 @@ export default class NavbarComponent extends Component<INavbarProps, INavbarStat
           return (
                <nav className="navbar">
 
-                    <div>USER</div>
+                    <div><i className="fas fa-user"></i> USER</div>
                     <button onClick={this.toggleMenu} className="hamburger">
                          <div className="hamburger__line"></div>
                          <div className="hamburger__line"></div>

@@ -102,11 +102,16 @@ export default class MessageBoxComponent extends Component<IMessageBoxProps, IMe
                let sender = message.sender.nickname ? message.sender.nickname : "anon.";
 
                return (
-                    <div key={`message${index}`}>
+                    <div>
+                    <div className="message--data">Wysłano:{moment(message.dateSend).format("DD.MM.YYYY HH:mm:ss")}</div>
+                    <div className="message" key={`message${index}`}>
 
-                         {moment(message.dateSend).format("DD MMMM YYYY HH:mm:ss")} [{sender}] - {message.content}
-
-                    </div>)
+                          {message.content}
+                    
+                    </div>
+                    <div className="message--sender">{sender}</div>
+                    </div>
+                    )
           })
 
           return (
@@ -130,13 +135,13 @@ export default class MessageBoxComponent extends Component<IMessageBoxProps, IMe
 
                          <form onSubmit={this.handleSubmit} className="message-form">
 
-                              <input type="text" name="message" className="global-input message-form__input" value={this.state.messageToSend} onChange={ 
+                              <textarea name="message" className="global-input message-form__input" value={this.state.messageToSend} onChange={ 
                                    (e) => {
                                         this.setState({messageToSend: e.target.value})
                                    }} 
                               />
  
-                              <button className="global-button global-button--orange global-button--lg">
+                              <button className="global-button global-button--blue global-button--lg">
                                    Wyślij
                               </button>
                          </form>
