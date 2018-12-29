@@ -1,6 +1,5 @@
 ﻿using communicator.Controllers;
 using communicator.Data.Interfaces;
-using communicator.Interfaces;
 using communicator.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -16,11 +15,10 @@ namespace communicator.Tests
         private UsersController _controller;
         private readonly IRepositoryWrapper _repository;
         private readonly ILogger<UsersController> _logger;
-        private readonly IUserService _userService;
 
         public UsersControllerTest()
         {
-            _controller = new UsersController(_repository, _logger, _userService);
+            _controller = new UsersController(_repository, _logger);
         }
 
         [Fact]
