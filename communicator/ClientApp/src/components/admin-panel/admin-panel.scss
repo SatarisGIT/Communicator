@@ -1,0 +1,28 @@
+.admin-panel-table {
+     background: rgba(0, 0, 0, 0.5);
+     margin: 0 auto;
+     min-width: 50%;
+     padding: 10px;
+     border-radius: 10px;
+     text-align:center;
+     td{
+          padding: 15px;
+          height: 50px;
+          vertical-align: middle;
+     }
+     th{
+          background-color: #004e63;
+          padding: 15px;
+          height: 20px;
+          vertical-align: middle;
+          color:white;
+     }
+
+}
+
+
+.admin-panel-component {
+     &__add-user-button {
+          margin: 0 auto 10px auto; 
+     }
+}

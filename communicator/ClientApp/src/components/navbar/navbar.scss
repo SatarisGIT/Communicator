@@ -1,0 +1,101 @@
+@import '../../index.scss';
+
+.navbar {
+     display: flex;
+
+     position: fixed;
+     top: 0;
+
+     z-index: map-get($z-indexes, navbar);
+
+     height: $nav-height;
+     width: $nav-width;
+
+     justify-content: space-between;
+     align-items: center;
+
+     padding: 0 20px;
+
+     background-color: $main-dark-color;
+
+     border-top: 1px solid $main-border-first-color;
+     border-bottom: 1px solid $main-border-second-color;
+
+     border-left: 1px solid $main-border-first-color;
+     border-right: 1px solid $main-border-second-color;
+
+     box-sizing: border-box;
+     border-bottom-right-radius: $sections-border-radius;
+
+  
+
+     a {
+          color: white;
+     }
+     a:hover{
+          font-size:19px;
+          transition: 0.2ms;
+     }
+
+     &__user-nickname {
+          color: white;
+          margin-left: 10px;
+     }
+
+     &__user {
+          max-width: 250px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+     }
+}
+
+
+
+
+
+
+.hamburger {
+
+     position: relative;
+
+     display: flex;
+     flex-direction: column;
+     justify-content: space-evenly;
+
+     height: $hamburger-size;
+     width: $hamburger-size;
+     transition: 0.2s;
+     &__line {
+          background: rgba(255, 255, 255, 0.4);
+          height: $hamburger-size/7;
+          border-radius: 5px;
+          width: $hamburger-size;
+     }
+}
+
+.hamburger:hover{
+     width:$hamburger-size+10;
+     height:$hamburger-size+10;
+     transition: 0.2s;
+}
+
+.menu-content {
+     position: absolute;
+     top: $nav-height + 10;
+     left: 10px;
+     
+     display: flex;
+     flex-direction: column;
+     justify-content: space-around;
+     align-items: center;
+
+     width: $nav-width - 20;
+     min-height: 150px;
+
+     box-sizing: border-box;
+     background: rgba($color: rgb(102, 149, 161), $alpha: 0.90);
+     border: 1px solid rgba(255, 255, 255, 0.6);
+     border-radius: 5px;
+
+}

@@ -1,0 +1,18 @@
+@import './index.scss';
+
+
+.main {
+     background: transparent;
+     margin-left: $nav-width;
+     background-color: white;
+     color:black;
+}
+
+
+// :not([data-component="NavbarComponent"]) {
+
+//      .navbar#{&} {
+//           background: green !important;
+//      }
+     
+// }

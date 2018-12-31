@@ -1,0 +1,73 @@
+@import '../../variables.scss';
+
+
+.loader-fly {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     position: fixed;
+     top: 0;
+     left: 0;
+
+     z-index: map-get($z-indexes, loading);
+
+
+     width: 100vw;
+     height: 100vh;
+
+     background: rgba(0, 0, 0, 0.8);
+
+     overflow: hidden;
+     user-select: none; 
+}
+
+
+.loading {
+
+     width: 100px;
+     height: 100px;
+     background: transparent;
+     border-radius: 50%;
+     opacity: 0.2;
+     box-sizing: border-box;
+
+     border: 20px solid #8b8b8b;
+     border-right: 20px solid transparent;
+
+     margin: 0 auto;
+     margin-top: 30px;
+
+     animation-name: spin;
+     animation-duration: 1.5s;
+     animation-iteration-count: infinite;
+
+     position: relative;
+
+
+     &__csharp {
+          color: #8b8b8b;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          font-weight: 800;
+          font-size: 70px;
+          right: -40px;
+     }
+
+}
+
+
+@keyframes spin {
+
+     from   {
+ 
+          transform: rotate(0);
+     }
+
+     to  {
+ 
+          transform: rotate(360deg);
+
+     }
+}

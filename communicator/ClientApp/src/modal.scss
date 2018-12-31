@@ -1,0 +1,44 @@
+@import './variables.scss';
+
+.ReactModal {
+
+     &__title {
+          font-weight: 800;
+          letter-spacing: 5px;
+          margin-bottom: 20px;
+          font-size: 2rem;
+     }
+
+     &__Overlay {
+          background: rgba(0, 0, 0, 0.5) !important;
+          z-index: map-get($z-indexes, modal) !important;
+     }
+
+     &__Content {
+          background: rgba(45, 45, 45, 0.95) !important;
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: center !important;
+          bottom: initial !important;
+     }
+
+     &__message {
+
+     }
+
+}
+
+
+.modal-buttons-container {
+     margin-top: auto;
+     width: 100%;
+     display: flex;
+     justify-content: space-around;
+}
+
+.modal-buttons-container {
+     margin-top: 30px;
+     width: 100%;
+     display: flex;
+     justify-content: space-around;
+}

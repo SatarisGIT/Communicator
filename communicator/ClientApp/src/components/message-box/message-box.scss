@@ -1,0 +1,48 @@
+@import '../../index.scss';
+
+.MessageBoxComponent {
+
+     position: relative;
+
+     .message-form {
+          position: fixed;
+          bottom: 20px;
+          width: 100%;
+          
+          display: flex;
+          max-width: calc(100vw - #{$nav-width} - 30px - 20px);
+
+
+          &__input {
+               flex: 1;
+               height: 70px;
+               resize: none;
+          }
+
+     }
+
+     .messages-content {
+          padding-bottom: 120px;
+
+     }
+
+
+}
+
+.message{
+     border: 1px solid;
+     width: 80%;
+     border-radius: 5px;
+     padding: 10px 10px 10px 10px;
+     margin-top:5px;
+     &--data{
+          font-size:12px;
+     }
+     &--sender{
+          font-size: 16px;
+          float: right;
+          width: 25%;
+          margin-top: 5px;
+          color: grey;
+     }
+}
