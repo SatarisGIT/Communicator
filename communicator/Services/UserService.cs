@@ -54,6 +54,18 @@ namespace communicator.Services
             return user;
         }
 
+        public User AuthenticateToken(string token)
+        {
+            var user = _repository.User.GetAllUsersAsync().Result.SingleOrDefault(u => u.Token == token);
+
+            if(user == null)
+            {
+                return null;
+            }
+
+            return user;
+        }
+
         public IEnumerable<User> GetAllWithoutPasswords()
         {
             return _repository.User.GetAllUsersAsync().Result.Select(u =>

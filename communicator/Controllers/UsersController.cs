@@ -42,6 +42,20 @@ namespace communicator.Controllers
             return Ok(user);
         }
 
+        [AllowAnonymous]
+        [HttpPost("authenticatetoken")]
+        public IActionResult AuthenticateToken([FromBody]User userParam)
+        {
+            var user = _userService.AuthenticateToken(userParam.Token);
+
+            if (user == null)
+            {
+                return BadRequest(new { message = "Token is incorrect or has been expired " });
+            }
+
+            return Ok(user);
+        }
+
         [HttpGet("getallwithoutpasswords")]
         public IActionResult GetAllWithoutPasswords()
         {
