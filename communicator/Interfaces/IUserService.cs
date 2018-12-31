@@ -8,7 +8,7 @@ namespace communicator.Interfaces
 {
    public interface IUserService
    {
-        User Authenticate(string username, string password);
+        Task<User> Authenticate(string username, string password);
         User AuthenticateToken(string token);
         IEnumerable<User> GetAllWithoutPasswords();
    }

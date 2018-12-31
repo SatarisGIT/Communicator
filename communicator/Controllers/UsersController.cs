@@ -32,7 +32,7 @@ namespace communicator.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]User userParam)
         {
-            var user = _userService.Authenticate(userParam.Nickname, userParam.Password);
+            var user = _userService.Authenticate(userParam.Nickname, userParam.Password).Result;
 
             if(user == null)
             {

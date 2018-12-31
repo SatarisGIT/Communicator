@@ -3,7 +3,6 @@
 .MessageBoxComponent {
 
      position: relative;
-     margin-bottom: 60px;
 
      .message-form {
           position: fixed;
@@ -19,6 +18,11 @@
                height: 70px;
                resize: none;
           }
+
+     }
+
+     .messages-content {
+          padding-bottom: 120px;
 
      }
 

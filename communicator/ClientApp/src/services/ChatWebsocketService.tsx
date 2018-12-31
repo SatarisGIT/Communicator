@@ -21,19 +21,19 @@ class ChatWebsocketService {
 
           const connection = new HubConnectionBuilder()
                .withUrl("/chatHub")
-               .configureLogging(LogLevel.Information)
+               // .configureLogging(LogLevel.Information)
                .build()
 
           connection
                .start()
                     .then(xx => {
-                         console.log(`%cChat service: Połączenie z grupą ${groupName} zostało nawiazane`, "font-size: 1.1rem;color: green;")
+                         // console.log(`%cChat service: Połączenie z grupą ${groupName} zostało nawiazane`, "font-size: 1.1rem;color: green;")
 
                               this.connection
                                    .invoke('JoinGroup', groupName)
                                    .then(response => {
-                                        console.log(`Dołączono do grupy: ${groupName}`)
-                                        console.log(response)
+                                        // console.log(`Dołączono do grupy: ${groupName}`)
+                                        // console.log(response)
                                    })
                                    .catch(err => console.error(err));
 
@@ -48,7 +48,10 @@ class ChatWebsocketService {
           this.connection.on('ReceiveMessage', (message: Message) => {
                this.messages.push(message);
                console.log(`Wiadomość do ${this.id}/${this.groupName}`, message)
-               this.onMessage(message);
+
+               if(this.onMessage) {
+                    this.onMessage(message);
+               }
           })
 
           // connection.on('sendToAll', (nick, receivedMessage) => {
@@ -65,22 +68,22 @@ class ChatWebsocketService {
      }
 
 
-     onMessage = (message: Message) => {}
+     onMessage: Function | null = (message: Message) => {}
 
 
-     send = (messageString: string) => {
+     send = (messageString: string, user: User) => {
           console.log(`Message sent: `, messageString)
 
-          let user = new User();
-               user.nickname = "NickName!";
-               // user.isAdmin = false;
-               // user.isLogged = false;
-               // user.lazyLoader = false;
-               // user.messagesReceived = [];
-               // user.messagesSent = [];
-               // user.password = "";
-               // user.userChannels = [];
-               // user.userId = 2;
+          // let user = new User();
+          //      user.nickname = "NickName!";
+          //      // user.isAdmin = false;
+          //      // user.isLogged = false;
+          //      // user.lazyLoader = false;
+          //      // user.messagesReceived = [];
+          //      // user.messagesSent = [];
+          //      // user.password = "";
+          //      // user.userChannels = [];
+          //      // user.userId = 2;
 
 
           let message = new Message();
@@ -89,7 +92,7 @@ class ChatWebsocketService {
                message.messageId = 1
                // message.receiver = 1
                message.receiverID = 1
-               message.sender = user
+               message.sender = user ? user : null
                message.senderID = 2
 
           this.connection

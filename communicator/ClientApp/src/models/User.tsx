@@ -8,4 +8,5 @@ export class User {
      password: string;
      isLogged: boolean;
      isAdmin: boolean;
+     token: string;
 }

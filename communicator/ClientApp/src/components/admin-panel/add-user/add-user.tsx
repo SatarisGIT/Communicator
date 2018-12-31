@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Modal from 'react-modal';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
+import { withRouter } from 'react-router-dom'
 
 interface ControllerAddUserForm extends EventTarget {
      name: HTMLInputElement,
@@ -18,8 +19,9 @@ interface ControllerAddUserForm extends EventTarget {
 
 
 
-interface IAddUserProps { 
+interface IAddUserProps {
      loading: boolean
+     history: any
 }
 
 interface IAddUserState { }
@@ -59,7 +61,11 @@ export default class AddUserComponent extends Component<IAddUserProps, IAddUserS
                     .subscribe(
                          (data: User) => {
                               console.log('[user added] => ', data)
+
                               this.setState({ loading: false });
+
+                              this.props.history.push('../')
+
                          },
 
                          (err: any) => {
@@ -69,15 +75,19 @@ export default class AddUserComponent extends Component<IAddUserProps, IAddUserS
                     )
           )
 
-          
+
      }
 
 
      render() {
 
+          // if (this.state.toAdmPanel === true) {
+          //      return <Redirect to='/admin/add' />
+          // }
+
           return (
                <div className="global-section__content">
-  
+
                     <Link to="../" className="admin-panel-component__add-user-button">
                          <button
                               className="global-button global-button--orange global-button--lg">
@@ -86,7 +96,7 @@ export default class AddUserComponent extends Component<IAddUserProps, IAddUserS
                     </Link>
 
 
-                    {this.state.loading ? <LoadingComponent fly={true} /> : null }
+                    {this.state.loading ? <LoadingComponent fly={true} /> : null}
 
 
                     <form onSubmit={this.handleSubmit} className="global-form add-user-form">
@@ -100,7 +110,7 @@ export default class AddUserComponent extends Component<IAddUserProps, IAddUserS
                               <div>Hasło</div>
                               <input className="global-input" name="password" required />
                          </label>
-                         
+
                          <label className="global-label">
                               <div>Administrator</div>
                               <input className="global-input" name="admin" type="checkbox" />

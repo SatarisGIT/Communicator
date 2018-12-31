@@ -40,4 +40,21 @@ export default class HttpApi {
           });
 
      }
+
+     
+     static delete(url: string) {
+
+          return Observable.create((observer) => {
+
+               axios.delete(url)
+                    .then((response) => {
+                         observer.next(response.data);
+                         observer.complete();
+                    })
+                    .catch((error) => {
+                         observer.error(error);
+                    });
+          });
+
+     }
 }

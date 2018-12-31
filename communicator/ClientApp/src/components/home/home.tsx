@@ -11,22 +11,27 @@ export default class HomeComponent extends Component {
 
           return (
                <section className="global-section">
-                         <header className="global-section__header">
+                    <header className="global-section__header">
 
-                              <div className="global-section__header-top">
-                                   <FontAwesomeIcon icon={'comment'} /> Strona główna
+                         <div className="global-section__header-top">
+                              <FontAwesomeIcon icon={'comment'} /> Strona główna
                               </div>
 
-                              <div className="global-section__header-bottom">
-                                   WSEI - Communicator
+                         <div className="global-section__header-bottom">
+                              WSEI - Communicator
                               </div>
 
-                         </header>
+                    </header>
 
                     <div className="global-section__content">
-                         Home page - zawarty zostanie tutaj opis aplikacji
-                         Tutaj też można testować komunikacje - ChatMessage
 
+                         <div>Autorstwa:</div>
+
+                         <ul>
+                              <li>Patryk Śliż</li>
+                              <li>Filip Wilczura </li>
+                              <li>Konrad Piech</li>
+                         </ul>
 
                     </div>
 

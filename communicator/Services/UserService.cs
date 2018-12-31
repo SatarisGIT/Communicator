@@ -25,7 +25,7 @@ namespace communicator.Services
             _appSettings = appSettings.Value;
         }
 
-        public User Authenticate(string nickname, string password)
+        public async Task<User> Authenticate(string nickname, string password)
         {
             var user = _repository.User.GetAllUsersAsync().Result.SingleOrDefault(u => u.Nickname == nickname && u.Password == password);
 
@@ -48,10 +48,20 @@ namespace communicator.Services
 
             var token = tokenHandler.CreateToken(tokenDescription);
             user.Token = tokenHandler.WriteToken(token);
+            
+            try
+            {
+                await _repository.User.UpdateUserAsync(user);
 
-            user.Password = null;
+                user.Password = null;
 
-            return user;
+                return user;
+            }
+            catch (Exception e)
+            {
+                return user;
+            }
+        
         }
 
         public User AuthenticateToken(string token)

@@ -24,9 +24,10 @@
      border-left: 1px solid $main-border-first-color;
      border-right: 1px solid $main-border-second-color;
 
-
      box-sizing: border-box;
      border-bottom-right-radius: $sections-border-radius;
+
+  
 
      a {
           color: white;
@@ -35,7 +36,23 @@
           font-size:19px;
           transition: 0.2ms;
      }
+
+     &__user-nickname {
+          color: white;
+          margin-left: 10px;
+     }
+
+     &__user {
+          max-width: 250px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+     }
 }
+
+
+
+
 
 
 .hamburger {

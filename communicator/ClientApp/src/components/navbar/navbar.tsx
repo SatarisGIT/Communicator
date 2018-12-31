@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './navbar.scss';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Channels, LoggedUser } from '../../App.context';
+import { User } from '../../models/User';
 
-interface INavbarProps {}
+interface INavbarProps { }
 
 interface INavbarState {
      menuToggled: boolean;
@@ -10,36 +12,45 @@ interface INavbarState {
 
 export default class NavbarComponent extends Component<INavbarProps, INavbarState> {
 
-     constructor(props: any) {
-          super(props);
+     static contextType = LoggedUser;
 
-          this.state = { 
-               menuToggled: false
-          };
-     }
-     
+     state = {
+          menuToggled: false
+     };
+
 
      toggleMenu = () => {
-
           let currentMenuToggledState = this.state.menuToggled;
-          this.setState({menuToggled: !currentMenuToggledState})
+          this.setState({ menuToggled: !currentMenuToggledState })
      }
 
 
      render() {
 
+          console.warn(this)
 
-          let menuContent =   <div onClick={this.toggleMenu} className="menu-content">
-                                   <Link to="/">Strona główna</Link>
-                                   <Link to="/messages">Wiadomości</Link>
-                                   <Link to="/admin">Admin</Link>
-                                   <Link to="/login">Login</Link>
-                              </div>
+          let { user } = this.context;
+
+          let menuContent = <div onClick={this.toggleMenu} className="menu-content">
+               <Link to="/">Strona główna</Link>
+
+               {user && user.isAdmin ? <Link to="/admin">Admin</Link> : null}
+
+               <Link to="/login">{user ? 'Profil użytkownika' : 'Logowanie'}</Link>
+          </div>
 
           return (
                <nav className="navbar">
 
-                    <div><i className="fas fa-user"></i> USER</div>
+                    <div className="navbar__user">
+                         <i className="fas fa-user"></i>
+
+                         <span className="navbar__user-nickname">
+                              {user ? user.nickname : "Anonimowy"}
+                         </span>
+
+                    </div>
+
                     <button onClick={this.toggleMenu} className="hamburger">
                          <div className="hamburger__line"></div>
                          <div className="hamburger__line"></div>
@@ -47,8 +58,8 @@ export default class NavbarComponent extends Component<INavbarProps, INavbarStat
                     </button>
 
 
-                    {this.state.menuToggled ? menuContent : null }
-              
+                    {this.state.menuToggled ? menuContent : null}
+
 
                </nav>
           )

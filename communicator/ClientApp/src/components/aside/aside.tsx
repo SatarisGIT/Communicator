@@ -50,7 +50,6 @@ export default class AsideComponent extends Component<IAsideProps, IAsideState> 
 
      render() {
 
-          console.warn(this)
 
           return (
                <aside className="aside">

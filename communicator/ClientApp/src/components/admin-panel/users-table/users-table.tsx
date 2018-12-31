@@ -14,7 +14,7 @@ interface IUserTableProps { }
 
 
 interface IUserTableState {
-     users: Array<User>;
+     users: User[];
      modalIsOpen: boolean;
      loading: {
           global: boolean;
@@ -38,19 +38,26 @@ export default class UserTableComponent extends Component<IUserTableProps, IUser
                },
                deletingUserId: null
           };
-     
      }
 
 
+
+
      componentWillMount() {
+          this.getData();
+     }
+
+
+     getData() {
+
+          let loading = this.state.loading;
+          loading.global = true;
+          this.setState({ loading: loading });
+
           this.subscriptions$.add(
                HttpApi.get('/api/Users')
                     .subscribe(
                          (data: User[]) => {
-                              
-                              // console.log('[state.users] => ', data)
-                              // console.log(data)
-
                               let loading = this.state.loading;
                               loading.global = false;
                               this.setState({ users: data, loading: loading });
@@ -58,6 +65,9 @@ export default class UserTableComponent extends Component<IUserTableProps, IUser
 
                          (err: any) => {
                               console.error(err);
+                              let loading = this.state.loading;
+                              loading.global = false;
+                              this.setState({ loading: loading });
                          }
                     )
           )
@@ -68,19 +78,45 @@ export default class UserTableComponent extends Component<IUserTableProps, IUser
      }
 
 
-     handleEdit = (e: any | MouseEvent, userId: number) => {
-          toastr.info(`Tutaj nastąpi obsluga edytowania usera o id: ${userId} `, "Edycja");
-     }
-
-
      handleDelete = (e: any | MouseEvent, userId: number) => {
           this.setState({ modalIsOpen: true, deletingUserId: userId });
      }
 
 
      handleDeleteSubmit = (e: any | MouseEvent) => {
-          toastr.info(`Tutaj nastąpi obsluga usuwania usera o id: ${this.state.deletingUserId}`, "Usuwanie");
-          this.closeModal();
+
+          let loading = this.state.loading;
+          loading.global = true;
+          this.setState({ loading: loading });
+
+          this.subscriptions$.add(
+               HttpApi.delete(`/api/Users/${this.state.deletingUserId}`)
+                    .subscribe(
+                         (data: User) => {
+                              let loading = this.state.loading;
+                              loading.global = false;
+
+                              this.setState({ loading: loading });
+                              toastr.success(`Użytkownik ${data.nickname} został usunięty`, "Usuwanie");
+
+                              this.getData();
+                              this.closeModal();
+                         },
+
+                         (err: any) => {
+                              console.error(err);
+                              let loading = this.state.loading;
+                              loading.global = false;
+                              this.setState({ loading: loading });
+                              toastr.error(`Użytkownik nie został usunięty`, "Błąd");
+
+                              this.closeModal();
+
+                         }
+                    )
+          )
+
+
      }
 
 
@@ -106,11 +142,14 @@ export default class UserTableComponent extends Component<IUserTableProps, IUser
                               <td>{user.userId}</td>
                               <td>{user.nickname}</td>
                               <td>{user.password}</td>
-                              <td className="actions"><button className="global-button global-button--orange actions--buttons" onClick={(e) => { this.handleEdit(e, user.userId) }}>Edytuj</button><button className="global-button global-button--red" onClick={(e) => { this.handleDelete(e, user.userId) }}>Usuń</button></td>
+                              <td className="actions">
+                                   <button className="global-button global-button--red" onClick={(e) => { this.handleDelete(e, user.userId) }}>Usuń</button>
+                              </td>
                          </tr>
                     )}
                </tbody>
           </table>
+
 
           return (
                <div className="global-section__content">
@@ -122,12 +161,7 @@ export default class UserTableComponent extends Component<IUserTableProps, IUser
                          </button>
                     </Link>
 
-                    {/* <button
-                         type='button'
-                         onClick={() => { history.push('/new-location') }}
-                    > */}
-
-                    {this.state.loading.global ? <LoadingComponent /> : userTable}
+                    {this.state.loading.global ? <LoadingComponent fly={true} /> : userTable}
 
                     <Modal isOpen={this.state.modalIsOpen}
                          contentLabel="Example Modal"

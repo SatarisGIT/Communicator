@@ -16,9 +16,13 @@ import AdminPanelComponent from './components/admin-panel/admin-panel';
 import HomeComponent from './components/home/home';
 import LoginComponent from './components/login/login';
 import AddUserComponent from './components/admin-panel/add-user/add-user';
-import { Channel } from './models/Channel';
 import ChatWebsocketService from './services/ChatWebsocketService';
-import { Channels } from './App.context';
+import { Channel } from './models/Channel';
+import { Channels, LoggedUser } from './App.context';
+import { User } from './models/User';
+import toastr from 'toastr';
+import LoadingComponent from './components/loading/loading';
+import { ChannelRaw } from './models/ChannelRaw';
 
 interface IAppProps {
 
@@ -27,6 +31,8 @@ interface IAppProps {
 
 interface IAppState {
      channels: Map<number, ChatWebsocketService>,
+     loggedUser: User | null,
+     loading: boolean
 }
 
 
@@ -34,53 +40,97 @@ export default class App extends Component<IAppProps, IAppState> {
 
      // ChatWebsocketService = new ChatWebsocketService("NAZWA GRUPY");
 
+     subscriptions$ = new Subscription();
+
      state = {
           channels: new Map<number, ChatWebsocketService>(),
-     }
-
-
-     returnChannels(): Array<Channel> {
-          let result: any = []
-
-          for (let i = 0; i < 10; i++) {
-
-               let type = i > 5 ? "public" : "user"
-
-               // let channel = new Channel(i, `XKanał nr: ${i}`, type)
-               let channel = new Channel(i, `Kanał nr ${i}`, type)
-               result.push(channel)
-
-          }
-
-          return result;
+          loggedUser: null,
+          loading: false
      }
 
 
      componentWillMount() {
 
-          let { channels } = this.state;
 
-          console.log("ASIDE WILL MOUNT - pobieranie kanałów...")
+          let token = localStorage.getItem('token');
+          if (token) {
 
-          setTimeout(() => {
-               console.log("Kanały pobrane!")
-
-               let response: Array<Channel> = this.returnChannels();
-
-               for (let channel of response) {
-                    channels.set(channel.id, new ChatWebsocketService(channel.id, channel.name));
+               let auth = {
+                    token: token
                }
 
-               this.setState({
-                    channels: channels
-               })
+               this.setState({ loading: true });
+               this.subscriptions$.add(
+                    HttpApi.post('/api/users/authenticatetoken', auth)
+                         .subscribe(
+                              (data: User) => {
+                                   console.log('[user logged] => ', data)
+                                   this.setState({ loading: false });
+                                   toastr.success(`Przywrócono sesje użytkownika: ${data.nickname} `, "Logowanie");
 
-          }, 30);
+                                   localStorage.setItem("token", data.token);
+                                   this.userUpdate(data);
+
+                                   this.getChannels();
+                              },
+
+                              (err: any) => {
+                                   console.error(err);
+                                   this.setState({ loading: false });
+                                   localStorage.removeItem("token");
+                                   toastr.error(`Sesja wygasła`, "Logowanie");
+                                   this.getChannels();
+
+                              }
+                         )
+               )
+
+          } else {
+               this.getChannels();
+          }
+
+     }
+
+
+     getChannels() {
+          this.setState({ loading: true });
+          this.subscriptions$.add(
+               HttpApi.get('/api/channels')
+                    .subscribe(
+                         (channels: ChannelRaw[]) => {
+                              console.log('[channels get] => ', channels)
+                              this.setState({ loading: false });
+     
+                              let channelsToSet = new Map();
+
+                              for (const channel of channels) {
+                                   channelsToSet.set(channel.channelId, new ChatWebsocketService(channel.channelId, channel.name));
+                              }
+
+                              this.setState({
+                                   channels: channelsToSet
+                              })
+               
+                             
+                         },
+
+                         (err: any) => {
+                              console.error(err);
+                              this.setState({ loading: false });
+                              toastr.error(`Blad podczas pobierania kanalow`, "Kanały");
+                         }
+                    )
+          )
+
 
      }
 
 
      componentWillUnmount() {
+
+          this.subscriptions$.unsubscribe();
+
+
           let { channels } = this.state;
 
           for (let value of channels.values()) {
@@ -90,28 +140,48 @@ export default class App extends Component<IAppProps, IAppState> {
      }
 
 
+     userUpdate = (user: User) => {
+          console.log("Tutaj user bedzie udpateowany")
+          console.log(user)
+
+          this.setState({
+               loggedUser: user
+          })
+     }
+
+
      render() {
 
           let { channels } = this.state;
 
+
           return (
-               <Channels.Provider value={channels}>
+               <LoggedUser.Provider value={{
+                    user: this.state.loggedUser,
+                    updateUser: this.userUpdate
+               }}>
 
-                    <div>
-                         <NavbarComponent></NavbarComponent>
-                         <AsideComponent></AsideComponent>
+                    <Channels.Provider value={channels}>
 
-                         <main className="main">
-                              <Route exact path="/" component={HomeComponent} />
-                              <Route path="/admin" component={AdminPanelComponent} />
-                              <Route path="/messages/:groupId" component={MessageBoxComponent} />
-                              <Route path="/login" component={LoginComponent} />
-                         </main>
+                         <div>
+                              {this.state.loading ? <LoadingComponent fly={true} /> : null}
+
+                              <NavbarComponent></NavbarComponent>
+                              <AsideComponent></AsideComponent>
+
+                              <main className="main">
+                                   <Route exact path="/" component={HomeComponent} />
+                                   <Route path="/admin" component={AdminPanelComponent} />
+                                   <Route path="/messages/:groupId" component={MessageBoxComponent} />
+                                   <Route path="/login" component={LoginComponent} />
+                              </main>
 
 
 
-                    </div>
-               </Channels.Provider>
+                         </div>
+
+                    </Channels.Provider>
+               </LoggedUser.Provider>
           );
      }
 }
