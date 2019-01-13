@@ -29,7 +29,7 @@ interface IAppProps {
 }
 
 
-interface IAppState {
+export interface IAppState {
      channels: Map<number, ChatWebsocketService>,
      loggedUser: User | null,
      loading: boolean
@@ -42,7 +42,7 @@ export default class App extends Component<IAppProps, IAppState> {
 
      subscriptions$ = new Subscription();
 
-     state = {
+     state: IAppState = {
           channels: new Map<number, ChatWebsocketService>(),
           loggedUser: null,
           loading: false
