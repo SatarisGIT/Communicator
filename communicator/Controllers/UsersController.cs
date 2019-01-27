@@ -140,7 +140,7 @@ namespace communicator.Controllers
                     await _repository.User.DeleteUserAsync(user);
                 }
 
-                return Ok(user);
+                return NoContent();
             }
             catch (Exception e)
             {
