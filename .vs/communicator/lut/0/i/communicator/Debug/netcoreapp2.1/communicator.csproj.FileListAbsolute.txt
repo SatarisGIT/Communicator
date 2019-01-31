@@ -4,7 +4,6 @@ C:\Users\Filip\Source\Repos\Communicator\.vs\communicator\lut\0\b\communicator\D
 C:\Users\Filip\Source\Repos\Communicator\.vs\communicator\lut\0\b\communicator\Debug\netcoreapp2.1\communicator.dll
 C:\Users\Filip\Source\Repos\Communicator\.vs\communicator\lut\0\b\communicator\Debug\netcoreapp2.1\communicator.Views.dll
 C:\Users\Filip\Source\Repos\Communicator\.vs\communicator\lut\0\b\communicator\Debug\netcoreapp2.1\communicator.Views.pdb
-C:\Users\Filip\Source\Repos\Communicator\.vs\communicator\lut\0\i\communicator\Debug\netcoreapp2.1\communicator.csprojAssemblyReference.cache
 C:\Users\Filip\Source\Repos\Communicator\.vs\communicator\lut\0\i\communicator\Debug\netcoreapp2.1\communicator.csproj.CoreCompileInputs.cache
 C:\Users\Filip\Source\Repos\Communicator\.vs\communicator\lut\0\i\communicator\Debug\netcoreapp2.1\communicator.RazorAssemblyInfo.cache
 C:\Users\Filip\Source\Repos\Communicator\.vs\communicator\lut\0\i\communicator\Debug\netcoreapp2.1\communicator.RazorAssemblyInfo.cs
@@ -20,3 +19,4 @@ C:\Users\Filip\Source\Repos\Communicator\.vs\communicator\lut\0\i\communicator\D
 C:\Users\Filip\Source\Repos\Communicator\.vs\communicator\lut\0\i\communicator\Debug\netcoreapp2.1\communicator.Views.pdb
 C:\Users\Filip\Source\Repos\Communicator\.vs\communicator\lut\0\i\communicator\Debug\netcoreapp2.1\communicator.csproj.CopyComplete
 C:\Users\Filip\Source\Repos\Communicator\.vs\communicator\lut\0\i\communicator\Debug\netcoreapp2.1\communicator.dll
+C:\Users\Filip\Source\Repos\Communicator\.vs\communicator\lut\0\i\communicator\Debug\netcoreapp2.1\communicator.csprojAssemblyReference.cache

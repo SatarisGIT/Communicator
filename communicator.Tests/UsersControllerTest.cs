@@ -6,8 +6,10 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,7 +58,7 @@ namespace communicator.Tests
         }
 
         [Fact]
-        public async Task GetUsers_RetriveListOfStudentsAsIEnumerable_ReturnsCorrectAmountOfUsers()
+        public async Task GetUsers_WhenCalled_ReturnsCorrectAmountOfUsers()
         {
             //Arrange
             var mockRepo = new Mock<IRepositoryWrapper>();
@@ -70,6 +72,22 @@ namespace communicator.Tests
             //Assert
             var model = Assert.IsAssignableFrom<IEnumerable<User>>(result);
             model.Count().Should().Be(2);
+        }
+
+        [Fact]
+        public async Task GetUserById_WhenCalled_ReturnsOk()
+        {
+            //Arrange   
+            var mockRepo = new Mock<IRepositoryWrapper>();
+            mockRepo.Setup(repo => repo.User.GetAllUsersAsync())
+                .ReturnsAsync(GetTestUsers());
+            var controller = new UsersController(mockRepo.Object, _logger, _service);
+            var id = 1;
+            //Act
+            var result = await controller.GetUserById(id);
+
+            //Assert
+            var okResult = result.Should().BeOfType<OkObjectResult>().Subject;
         }
 
         [Fact]
@@ -140,5 +158,7 @@ namespace communicator.Tests
             var okResult = result.Should().BeOfType<NoContentResult>().Subject;         
             Assert.Throws<NullReferenceException>(() => _controller.GetUserById(2).Result);
         }
+
+        
     }
 }
