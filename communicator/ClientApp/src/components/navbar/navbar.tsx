@@ -14,7 +14,7 @@ export default class NavbarComponent extends Component<INavbarProps, INavbarStat
 
      static contextType = LoggedUser;
 
-     state = {
+     state: INavbarState = {
           menuToggled: false
      };
 

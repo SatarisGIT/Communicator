@@ -1,0 +1,77 @@
+TestCase #1 - Login testing
+
+Opis: Sprawdzenie czy możliwe jest zalogowanie do aplikacji z użyciem poprawnego loginu i hasła
+
+Warunki wstępne: W bazie danych istnieje użytkownik z nadanym loginem: test oraz hasłem: test
+
+Kroki:
+	1) Otworzenie panelu logowania
+	2) Wpisanie poprawnego loginu: test oraz poprawnego hasła: test
+
+Oczekiwany rezultat:
+	1) Panel logowania wyświetla się poprawnie
+	2) Użytkownik został poprawnie zalogowany, wyświetlona została strona główna aplikacji
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+TestCase #2 - Channels testing
+
+Opis: Sprawdzenie czy panel boczny poprawnie wyświetla wszystkie dostępne kanały i czy możliwa jest komunikacja
+
+Warunki wstępne: W bazie danych istnieje 8 kanałów o nazwach: e Kanal: 1 - one, Kanal: 2 - two,  Kanal: 3 - three,  Kanal: 4 - four,  Kanal: 5 - five,  Kanal: 6 - six,  Kanal: 7 - seven,  Kanal: 8 - eightthth
+
+Kroki:
+	1) Sprawdzenie czy kanały na menu bocznym istnieją
+	2) Przejście do kanału numer 1
+	3) Próba wysłania wiadomości
+	4) Odczytanie wysłanej wiadomości
+
+Oczekiwany rezultat:
+	1) Kanały zostają sprawdzone i istnieją w panelu bocznym w pełnym komplecie
+	2) Widok kanału 1 wyświetlił się
+	3) Wiadomość została wysłana
+	4) Odczytanie wiadomości kończy sie sukcesem, została wysłana i zarejestrowana
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+TestCase #3 - Admin panel testing
+
+Opis: Sprawdzenie czy panel administracyjny wyświetla się oraz czy działa poprawnie
+
+Warunki wstępne: W bazie danych istnieje użytkownik test z hasłem test który jest administratorem (brak więcej użytkowników)
+
+Kroki:
+	1) Zalogowanie się na użytkownika loginem test i hasłem test
+	2) Przejście do panelu administracyjnego
+	3) Próba dodania nowego użytkownika
+	4) Odczytanie w panelu administracyjnym z tabeli informacji o dodaniu nowego użytkownika
+	5) Próba usunięcia drugiego użytkownika z listy (a więc tego dodanego)
+
+Oczekiwany rezultat:
+	1) Logowanie kończy się sukcesem
+	2) Widok panelu administracyjnego wyświetla się
+	3) Użytkownik zostaje poprawnie dodany, następuje przejście do widoku głownego panelu administracyjnego
+	4) Tabela zostaje przeładowana, przez co widać informacje o dwóch użytkowniakch w bazie
+	5) Użytkownik zostaje poprawnie usunięty
+	
+----------------------------------------------------------------------------------------------------------------------------------------
+
+TestCase #4 - Rendering test
+
+Opis: Sprawdzenie czy wszystkie widoki w aplikacji po zalogowaniu są poprawne wyrenderowane
+
+Warunki wstępne: W bazie danych istnieje użytkownik test z hasłem test i istnieje conajmniej jeden kanał do rozmów
+
+Kroki:
+	1) Zalogowanie się na użytkownika loginem test i hasłem test
+	2) Przejście do podstrony: Strona główna
+	3) Przejście do podstrony: Admin panel
+	4) Przejście do podstrony: Panel użytkownika
+	5) Przejście do podstrony: (każdy kanał z menu bocznego)
+
+Oczekiwany rezultat:
+	1) Logowanie kończy się sukcesem
+	2) Widok strony głównej wyświetla się poprawnie
+	3) Widok panelu administratora wyświetla się poprawnie
+	4) Widok panelu użytkownika wyświetla się poprawnie
+	5) Widoki poszczególnych kanałów do rozmów wyświetlają się poprawnie
