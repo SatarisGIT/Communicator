@@ -51,6 +51,13 @@ namespace communicator.Tests
                     Password = "VeryWeakPassword1",
                     Token = "81293809dkl;ask;eq0e",
                     UserChannels = null
+                },
+                new User()
+                {
+                    UserId = 3,
+                    IsAdmin = false,
+                    IsLogged = false,
+                    Password = null
                 }
             };
 
@@ -71,7 +78,26 @@ namespace communicator.Tests
 
             //Assert
             var model = Assert.IsAssignableFrom<IEnumerable<User>>(result);
-            model.Count().Should().Be(2);
+            model.Count().Should().Be(3);
+        }
+
+        [Fact]
+        public async Task GetUsers_WhenCalled_HandlesException()
+        {
+            //Arrange
+            var mockRepo = new Mock<IRepositoryWrapper>();
+            var mockLogger = new Mock<ILogger<UsersController>>();
+            mockRepo
+                .Setup(repo => repo.User.GetAllUsersAsync())
+                .ThrowsAsync(new InvalidOperationException());
+
+            var controller = new UsersController(mockRepo.Object, mockLogger.Object, _service);
+
+            //Act
+            var result = await controller.GetUsers();
+
+            //Assert
+            Assert.Null(result);
         }
 
         [Fact]
@@ -88,6 +114,25 @@ namespace communicator.Tests
 
             //Assert
             var okResult = result.Should().BeOfType<OkObjectResult>().Subject;
+        }
+
+        [Fact]
+        public async Task GetuserById_WhenCalled_HandlesException()
+        {
+            //Arrange
+            var mockRepo = new Mock<IRepositoryWrapper>();
+            var mockLogger = new Mock<ILogger<UsersController>>();
+            mockRepo
+                .Setup(repo => repo.User.GetUserByIdAsync(1))
+                .ThrowsAsync(new InvalidOperationException());
+
+            var controller = new UsersController(mockRepo.Object, mockLogger.Object, _service);
+
+            //Act
+            var result = await controller.GetUserById(1);
+
+            //Assert
+            var okResult = result.Should().BeOfType<NotFoundResult>();
         }
 
         [Fact]
@@ -117,6 +162,34 @@ namespace communicator.Tests
         }
 
         [Fact]
+        public async Task CreateUser_WhenCalled_HandlesException()
+        {
+            //Arrange
+            var mockRepo = new Mock<IRepositoryWrapper>();
+            var newUser = new User
+            {
+                UserId = 3,
+                IsAdmin = true,
+                IsLogged = true,
+                Password = "1230dsa",
+                Nickname = "TestUser3"
+            };
+
+            var mockLogger = new Mock<ILogger<UsersController>>();
+            mockRepo
+                .Setup(repo => repo.User.CreateUserAsync(newUser))
+                .ThrowsAsync(new InvalidOperationException());
+
+            var controller = new UsersController(mockRepo.Object, mockLogger.Object, _service);
+
+            //Act
+            var result = await controller.CreateUser(newUser);
+
+            //Assert
+            var okResult = result.Should().BeOfType<StatusCodeResult>();
+        }
+
+        [Fact]
         public async Task UpdateUser_PatchCurrentUserById_ReturnsOkStatus()
         {
             //Arrange
@@ -143,6 +216,34 @@ namespace communicator.Tests
         }
 
         [Fact]
+        public async Task UpdateUser_WhenCalled_HandlesException()
+        {
+            //Arrange
+            var mockRepo = new Mock<IRepositoryWrapper>();
+            var newUser = new User
+            {
+                UserId = 3,
+                IsAdmin = true,
+                IsLogged = true,
+                Password = "1230dsa",
+                Nickname = "TestUser3"
+            };
+
+            var mockLogger = new Mock<ILogger<UsersController>>();
+            mockRepo
+                .Setup(repo => repo.User.GetUserByIdAsync(3))
+                .ThrowsAsync(new InvalidOperationException());
+
+            var controller = new UsersController(mockRepo.Object, mockLogger.Object, _service);
+
+            //Act
+            var result = await controller.UpdateUser(3);
+
+            //Assert
+            var okResult = result.Should().BeOfType<StatusCodeResult>();
+        }
+
+        [Fact]
         public async Task DeleteUser_RemoveUser_UserShouldNotBeFound()
         {
             //Arrange
@@ -159,6 +260,67 @@ namespace communicator.Tests
             Assert.Throws<NullReferenceException>(() => _controller.GetUserById(2).Result);
         }
 
-        
+        [Fact]
+        public async Task DeleteUser_WhenCalled_HandlesException()
+        {
+            //Arrange
+            var mockRepo = new Mock<IRepositoryWrapper>();
+
+            var mockLogger = new Mock<ILogger<UsersController>>();
+            mockRepo
+                .Setup(repo => repo.User.GetUserByIdAsync(2))
+                .ThrowsAsync(new InvalidOperationException());
+
+            var controller = new UsersController(mockRepo.Object, mockLogger.Object, _service);
+
+            //Act
+            var result = await controller.DeleteUser(2);
+
+            //Assert
+            var okResult = result.Should().BeOfType<StatusCodeResult>();
+        }
+
+        [Fact]
+        public void AuthenticateToken_WhenCalled_ReturnsBadRequest()
+        {
+            //Arrange
+            var mockService = new Mock<IUserService>();
+            var user = new User()
+            {
+                UserId = 4,
+                IsAdmin = true,
+                Token = "12983912803981",
+                IsLogged = true,
+                MessagesSent = null,
+                MessagesReceived = null,
+                Nickname = "test3",
+                Password = "Str0ngP@ssword123",
+                UserChannels = null
+            };
+            
+            var controller = new UsersController(_repository, _logger, mockService.Object);
+            
+            //Act
+            var result = controller.AuthenticateToken(user);
+
+            //Assert
+            var okResult = result.Should().BeOfType<BadRequestObjectResult>();         
+        }
+
+        [Fact]
+        public void GetAllWithoutPasswords_WhenCalled_ReturnsOk()
+        {
+            //Arrange
+            var mockService = new Mock<IUserService>();
+            var mockRepo = new Mock<IRepositoryWrapper>();
+            mockRepo.Setup(repo => repo.User.GetAllUsersAsync())
+                .ReturnsAsync(GetTestUsers());
+            var controller = new UsersController(mockRepo.Object, _logger, mockService.Object);
+
+            //Act
+            var result = controller.GetAllWithoutPasswords();
+
+            var okResult = result.Should().BeOfType<OkObjectResult>();
+        }
     }
 }
