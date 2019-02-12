@@ -308,6 +308,92 @@ namespace communicator.Tests
         }
 
         [Fact]
+        public void AuthenticateToken_WhenCalled_ReturnsOkResult()
+        {
+            //Arrange
+            var mockService = new Mock<IUserService>();
+            var user = new User()
+            {
+                UserId = 4,
+                IsAdmin = true,
+                Token = "12983912803981",
+                IsLogged = true,
+                MessagesSent = null,
+                MessagesReceived = null,
+                Nickname = "test3",
+                Password = "Str0ngP@ssword123",
+                UserChannels = null
+            };
+
+            mockService.Setup(x => x.AuthenticateToken("12983912803981")).Returns(user);
+
+
+            var controller = new UsersController(_repository, _logger, mockService.Object);
+
+            //Act
+            var result = controller.AuthenticateToken(user);
+
+            //Assert
+            var okResult = result.Should().BeOfType<OkObjectResult>();
+        }
+
+        [Fact]
+        public void Authenticate_WhenCalled_ReturnsBadRequest()
+        {
+            //Arrange
+            var mockService = new Mock<IUserService>();
+            var user = new User()
+            {
+                UserId = 4,
+                IsAdmin = true,
+                Token = "12983912803981",
+                IsLogged = true,
+                MessagesSent = null,
+                MessagesReceived = null,
+                Nickname = "test3",
+                Password = "Str0ngP@ssword123",
+                UserChannels = null
+            };
+
+            var controller = new UsersController(_repository, _logger, mockService.Object);
+
+            //Act
+            var result = controller.Authenticate(user);
+
+            //Assert
+            var okResult = result.Should().BeOfType<BadRequestObjectResult>();
+        }
+
+        [Fact]
+        public void Authenticate_WhenCalled_ReturnsOk()
+        {
+            //Arrange
+            var mockService = new Mock<IUserService>();
+            var user = new User()
+            {
+                UserId = 4,
+                IsAdmin = true,
+                Token = "12983912803981",
+                IsLogged = true,
+                MessagesSent = null,
+                MessagesReceived = null,
+                Nickname = "test3",
+                Password = "Str0ngP@ssword123",
+                UserChannels = null
+            };
+
+            mockService.Setup(x => x.Authenticate("test3", "Str0ngP@ssword123")).ReturnsAsync(user);
+
+            var controller = new UsersController(_repository, _logger, mockService.Object);
+
+            //Act
+            var result = controller.Authenticate(user);
+
+            //Assert
+            var okResult = result.Should().BeOfType<OkObjectResult>();
+        }
+
+        [Fact]
         public void GetAllWithoutPasswords_WhenCalled_ReturnsOk()
         {
             //Arrange
