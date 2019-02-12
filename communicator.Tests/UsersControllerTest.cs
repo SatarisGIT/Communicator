@@ -261,6 +261,22 @@ namespace communicator.Tests
         }
 
         [Fact]
+        public async Task DeleteUser_RemoveUser_UserShouldBeDeleted()
+        {
+            //Arrange
+            var mockRepo = new Mock<IRepositoryWrapper>();
+            var user = new User();
+            mockRepo.Setup(repo => repo.User.DeleteUserAsync(user));
+            var controller = new UsersController(mockRepo.Object, _logger, _service);
+
+            //Act
+            var result = await controller.DeleteUser(2);
+
+            //Assert
+            var okResult = result.Should().BeOfType<NoContentResult>().Subject;
+        }
+
+        [Fact]
         public async Task DeleteUser_WhenCalled_HandlesException()
         {
             //Arrange
