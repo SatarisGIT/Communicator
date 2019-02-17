@@ -1,4 +1,4 @@
-# ASP.NET-Project
+# Communicator
 
 Uruchomienie projektu:
 
