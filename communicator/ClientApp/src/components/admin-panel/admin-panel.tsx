@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 
-export default class AdminPanelComponent extends Component {
+export default class AdminPanelComponent extends Component<any, any> {
 
      render() {
 

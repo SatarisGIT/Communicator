@@ -10,7 +10,7 @@ import { LoggedUser } from '../../App.context';
 
 
 
-export default class LoginComponent extends Component {
+export default class LoginComponent extends Component<any, any> {
 
 
      static contextType = LoggedUser;
