@@ -11177,11 +11177,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Filip\\Source\\Repos\\Communicator\\communicator.Tests\\communicator.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\Filip\\source\\repos\\testproject\\Communicator\\communicator.Tests\\communicator.Tests.csproj",
       "projectName": "communicator.Tests",
-      "projectPath": "C:\\Users\\Filip\\Source\\Repos\\Communicator\\communicator.Tests\\communicator.Tests.csproj",
+      "projectPath": "C:\\Users\\Filip\\source\\repos\\testproject\\Communicator\\communicator.Tests\\communicator.Tests.csproj",
       "packagesPath": "C:\\Users\\Filip\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Filip\\Source\\Repos\\Communicator\\communicator.Tests\\obj\\",
+      "outputPath": "C:\\Users\\Filip\\source\\repos\\testproject\\Communicator\\communicator.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -11200,8 +11200,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\Filip\\Source\\Repos\\Communicator\\communicator\\communicator.csproj": {
-              "projectPath": "C:\\Users\\Filip\\Source\\Repos\\Communicator\\communicator\\communicator.csproj"
+            "C:\\Users\\Filip\\source\\repos\\testproject\\Communicator\\communicator\\communicator.csproj": {
+              "projectPath": "C:\\Users\\Filip\\source\\repos\\testproject\\Communicator\\communicator\\communicator.csproj"
             }
           }
         }

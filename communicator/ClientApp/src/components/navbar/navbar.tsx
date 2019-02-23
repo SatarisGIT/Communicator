@@ -14,7 +14,7 @@ export default class NavbarComponent extends Component<INavbarProps, INavbarStat
 
      static contextType = LoggedUser;
 
-     state = {
+     state: INavbarState = {
           menuToggled: false
      };
 
@@ -26,8 +26,6 @@ export default class NavbarComponent extends Component<INavbarProps, INavbarStat
 
 
      render() {
-
-          console.warn(this)
 
           let { user } = this.context;
 

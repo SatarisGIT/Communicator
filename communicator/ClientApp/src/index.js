@@ -4,12 +4,9 @@ import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route, Link } from "react-router-dom";
-
-
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faGlobe, faUser, faComment, faSpinner } from '@fortawesome/fontawesome-free-solid'
 library.add(faGlobe, faUser, faComment, faSpinner)
-
 
 const rootEl = document.getElementById('root')
 

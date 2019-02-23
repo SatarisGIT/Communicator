@@ -1,0 +1,29 @@
+﻿TestCase #1
+
+Opis: Sprawdzenie czy możliwe jest zalogowanie do aplikacji z użyciem poprawnego loginu i hasła
+
+Warunki wstępne: W bazie danych istnieje użytkownik z nadanym loginem: test oraz hasłem: test
+
+Kroki:
+	1) Otworzenie panelu logowania
+	2) Wpisanie poprawnego loginu: test
+	3) Wpisanie poprawnego hasła: test
+
+Oczekiwany rezultat:
+1) Użytkownik został poprawnie zalogowany
+2) Wyświetlona została strona główna aplikacji
+
+TestCase #2
+
+Opis: Sprawdzenie czy niemożliwym jest zalogowanie się do aplikacji z użyciem złego hasła lub/i loginu
+
+Warunki wstępne: W bazie danych istnieje użytkownik o loginie: test oraz haśle: test
+
+Kroki:
+	1) Otworzenie panelu logowania
+	2) Wpisanie poprawnego loginu: test
+	3) Wpisanie niepoprawnego hasła: test2
+
+Oczekiwany rezultat:
+1) Użytkownik nie został zalogowany do aplikacji
+2) Wyświetlone zostało powiadomienie w prawym górnym rogu aplikacji, informujące o błędnym logowaniu

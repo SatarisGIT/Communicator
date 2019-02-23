@@ -134,12 +134,7 @@ namespace communicator.Controllers
             try
             {
                 var user = await _repository.User.GetUserByIdAsync(id);
-
-                if(user != null)
-                {
-                    await _repository.User.DeleteUserAsync(user);
-                }
-
+                await _repository.User.DeleteUserAsync(user);
                 return NoContent();
             }
             catch (Exception e)
