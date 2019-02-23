@@ -1,6 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import NavbarComponent from './navbar';
+import { User } from '../../models/User';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { LoggedUser } from '../../App.context';
 
 
 describe('<NavbarComponent /> Tests', () => {
@@ -17,51 +20,48 @@ describe('<NavbarComponent /> Tests', () => {
           expect(wrapper.instance().state.menuToggled).not.toBeTruthy();
 
      });
-     
+
 
      it('checks NavBar toggling menu', () => {
           const wrapper = shallow<NavbarComponent>(<NavbarComponent />);
           expect(wrapper.contains("Strona główna")).not.toBeTruthy();
 
-          wrapper.instance().setState({menuToggled: true})
+          wrapper.instance().setState({ menuToggled: true })
 
           expect(wrapper.contains("Strona główna")).toBeTruthy();
      });
 
 
+     it('check Navbar reaction for logged not-admin user case', async function () {
 
-     
+          let mockUser = new User();
 
-     // it('checks AsideComponent exists on initialized App component', () => {
-     //      const wrapper = shallow(<App />);
-     //      expect(wrapper.contains(<AsideComponent></AsideComponent>)).toBeTruthy();
-     // });
+          mockUser.messagesSent = []
+          mockUser.messagesReceived = []
+          mockUser.userChannels = []
+          mockUser.lazyLoader = "XXX"
+          mockUser.userId = 1
+          mockUser.nickname = "MockUser"
+          mockUser.password = "MockUserPass"
+          mockUser.isLogged = true
+          mockUser.isAdmin = false
+          mockUser.token = "userToken"
 
-     
-     // it('updateUser method and state checks', async function () {
-     //      const wrapper = shallow<App>(<App />);
+          const context = { user: mockUser };
 
-     //      let mockUser = new User();
+          const wrapper = shallow<NavbarComponent>(
+               <NavbarComponent />, { context }
+          );
 
-     //      mockUser.messagesSent = []
-     //      mockUser.messagesReceived = []
-     //      mockUser.userChannels = []
-     //      mockUser.lazyLoader = "XXX"
-     //      mockUser.userId = 1
-     //      mockUser.nickname = "MockUser"
-     //      mockUser.password = "MockUserPass"
-     //      mockUser.isLogged = true
-     //      mockUser.isAdmin = true
-     //      mockUser.token = "userToken"
+          NavbarComponent.contextType = LoggedUser
 
-     //      const wrapperInstance = wrapper.instance();
+          wrapper.instance().context = {
+               user: mockUser
+          }
 
-     //      wrapperInstance.userUpdate(mockUser)
-
-     //      //Check if state is setted
-     //      expect(wrapperInstance.state.loggedUser).toEqual(mockUser);
-
-     // });
+          //Check if user can go to admin panel
+          expect(wrapper.contains(<Link to="/admin">Admin</Link>)).not.toBeTruthy();
+     });
 
 })
 

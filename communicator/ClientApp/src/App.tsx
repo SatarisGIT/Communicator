@@ -64,7 +64,7 @@ export default class App extends Component<IAppProps, IAppState> {
                     HttpApi.post('/api/users/authenticatetoken', auth)
                          .subscribe(
                               (data: User) => {
-                                   console.log('[user logged] => ', data)
+                                   // console.log('[user logged] => ', data)
                                    this.setState({ loading: false });
                                    toastr.success(`Przywrócono sesje użytkownika: ${data.nickname} `, "Logowanie");
 
@@ -98,7 +98,7 @@ export default class App extends Component<IAppProps, IAppState> {
                HttpApi.get('/api/channels')
                     .subscribe(
                          (channels: ChannelRaw[]) => {
-                              console.log('[channels get] => ', channels)
+                              // console.log('[channels get] => ', channels)
                               this.setState({ loading: false });
      
                               let channelsToSet = new Map();
@@ -141,8 +141,8 @@ export default class App extends Component<IAppProps, IAppState> {
 
 
      userUpdate = (user: User) => {
-          console.log("Tutaj user bedzie udpateowany")
-          console.log(user)
+          // console.log("Tutaj user bedzie udpateowany")
+          // console.log(user)
 
           this.setState({
                loggedUser: user

@@ -27,8 +27,6 @@ export default class NavbarComponent extends Component<INavbarProps, INavbarStat
 
      render() {
 
-          console.warn(this)
-
           let { user } = this.context;
 
           let menuContent = <div onClick={this.toggleMenu} className="menu-content">
